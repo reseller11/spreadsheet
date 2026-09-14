@@ -1,4 +1,5 @@
- html>
+```html
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -779,4 +780,827 @@ class="search"
 id="search"
 type="text"
 placeholder="Sök produkter..."
-oni
+oninput="renderProducts()">
+
+</div>
+
+
+<main class="products" id="products"></main>
+
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-logo">
+
+<div class="footer-icon">AF</div>
+
+<strong>AlexFynds</strong>
+
+</div>
+
+<p>
+Hitta fynden. Kolla produkten. Klicka vidare.
+</p>
+
+<div class="socials">
+
+<a
+class="social"
+href="https://www.tiktok.com/@alexfynds"
+target="_blank">
+TikTok
+</a>
+
+<a
+class="social"
+href="https://www.instagram.com/alexfynds?igsi=c2dmMDg2YWplcXox&utm_source=qr"
+target="_blank">
+Instagram
+</a>
+
+<a
+class="social"
+href="DIN_DISCORD_LÄNK"
+target="_blank">
+Discord
+</a>
+
+</div>
+
+</footer>
+
+
+<div class="welcome-overlay" id="welcomePopup">
+
+<div class="welcome-box">
+
+<button class="welcome-close" onclick="closeWelcome()">×</button>
+
+<div class="welcome-content">
+
+<div class="welcome-logo">AF</div>
+
+<div class="welcome-badge">
+VÄLKOMMEN TILL ALEXFYNDS
+</div>
+
+<h2>Redo att hitta fynden</h2>
+
+<p>
+Hitta produkter här på AlexFynds och gå sedan vidare till GoatedBuy via länken
+</p>
+
+<div class="welcome-offer">
+
+<strong>15% rabatt</strong>
+
+<span>
+på ditt första köp hos GoatedBuy
+</span>
+
+</div>
+
+<div class="welcome-features">
+
+<div>✓ Produktfynd</div>
+<div>✓ Flera storlekar</div>
+<div>✓ Produktlänkar</div>
+
+</div>
+
+<a
+class="welcome-button"
+href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
+target="_blank">
+
+Logga in på GoatedBuy
+
+</a>
+
+<button
+class="browse-button"
+onclick="closeWelcome()">
+
+Bläddra bland fynden
+
+</button>
+
+<small>
+Rabatt gäller enligt aktuella villkor hos GoatedBuy
+</small>
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+/* =========================================
+   ÄNDRA PRODUKTER HÄR
+========================================= */
+
+const products=[
+
+{
+name:"Produkt 01",
+price:299,
+description:"Skriv beskrivningen här. Lägg information om material, passform, kvalitet och annat.",
+sizes:["XS","S","M","L","XL"],
+images:[
+"images/produkt1.jpg",
+"images/produkt1-2.jpg",
+"images/produkt1-3.jpg",
+"images/produkt1-4.jpg",
+"images/produkt1-5.jpg",
+"images/produkt1-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 02",
+price:399,
+description:"Skriv beskrivningen här.",
+sizes:["S","M","L","XL"],
+images:[
+"images/produkt2.jpg",
+"images/produkt2-2.jpg",
+"images/produkt2-3.jpg",
+"images/produkt2-4.jpg",
+"images/produkt2-5.jpg",
+"images/produkt2-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 03",
+price:449,
+description:"Skriv beskrivningen här.",
+sizes:["40","41","42","43","44"],
+images:[
+"images/produkt3.jpg",
+"images/produkt3-2.jpg",
+"images/produkt3-3.jpg",
+"images/produkt3-4.jpg",
+"images/produkt3-5.jpg",
+"images/produkt3-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 04",
+price:499,
+description:"Skriv beskrivningen här.",
+sizes:["S","M","L"],
+images:[
+"images/produkt4.jpg",
+"images/produkt4-2.jpg",
+"images/produkt4-3.jpg",
+"images/produkt4-4.jpg",
+"images/produkt4-5.jpg",
+"images/produkt4-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 05",
+price:549,
+description:"Skriv beskrivningen här.",
+sizes:["XS","S","M","L","XL"],
+images:[
+"images/produkt5.jpg",
+"images/produkt5-2.jpg",
+"images/produkt5-3.jpg",
+"images/produkt5-4.jpg",
+"images/produkt5-5.jpg",
+"images/produkt5-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 06",
+price:599,
+description:"Skriv beskrivningen här.",
+sizes:["40","41","42","43","44"],
+images:[
+"images/produkt6.jpg",
+"images/produkt6-2.jpg",
+"images/produkt6-3.jpg",
+"images/produkt6-4.jpg",
+"images/produkt6-5.jpg",
+"images/produkt6-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 07",
+price:649,
+description:"Skriv beskrivningen här.",
+sizes:["S","M","L","XL"],
+images:[
+"images/produkt7.jpg",
+"images/produkt7-2.jpg",
+"images/produkt7-3.jpg",
+"images/produkt7-4.jpg",
+"images/produkt7-5.jpg",
+"images/produkt7-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 08",
+price:699,
+description:"Skriv beskrivningen här.",
+sizes:["XS","S","M","L"],
+images:[
+"images/produkt8.jpg",
+"images/produkt8-2.jpg",
+"images/produkt8-3.jpg",
+"images/produkt8-4.jpg",
+"images/produkt8-5.jpg",
+"images/produkt8-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 09",
+price:749,
+description:"Skriv beskrivningen här.",
+sizes:["S","M","L","XL"],
+images:[
+"images/produkt9.jpg",
+"images/produkt9-2.jpg",
+"images/produkt9-3.jpg",
+"images/produkt9-4.jpg",
+"images/produkt9-5.jpg",
+"images/produkt9-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+},
+
+{
+name:"Produkt 10",
+price:799,
+description:"Skriv beskrivningen här.",
+sizes:["40","41","42","43","44","45"],
+images:[
+"images/produkt10.jpg",
+"images/produkt10-2.jpg",
+"images/produkt10-3.jpg",
+"images/produkt10-4.jpg",
+"images/produkt10-5.jpg",
+"images/produkt10-6.jpg"
+],
+link:"DIN_PRODUKTLÄNK_HÄR"
+}
+
+];
+
+
+/* =========================================
+   GOATEDBUY LÄNK
+========================================= */
+
+const goatedBuyLink=
+"https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds";
+
+
+/* =========================================
+   VALUTOR
+========================================= */
+
+const rates={
+SEK:1,
+EUR:.092,
+USD:.107,
+GBP:.079,
+CNY:.77,
+JPY:16,
+CHF:.085,
+NOK:1.08,
+DKK:.69,
+PLN:.39
+};
+
+const symbols={
+SEK:"kr",
+EUR:"€",
+USD:"$",
+GBP:"£",
+CNY:"¥",
+JPY:"¥",
+CHF:"Fr",
+NOK:"kr",
+DKK:"kr",
+PLN:"zł"
+};
+
+
+/* =========================================
+   SPRÅK
+========================================= */
+
+const text={
+
+sv:{
+hero:"Hitta dina favoritprodukter",
+search:"Sök produkter...",
+shipping:"exkl. frakt",
+sizes:"Storlekar",
+copy:"Kopiera produktlänk",
+goated:"Gå till GoatedBuy",
+copied:"Länken kopierades",
+no:"Inga produkter hittades"
+},
+
+en:{
+hero:"Find your favorite products",
+search:"Search products...",
+shipping:"shipping excluded",
+sizes:"Sizes",
+copy:"Copy product link",
+goated:"Go to GoatedBuy",
+copied:"Link copied",
+no:"No products found"
+},
+
+zh:{
+hero:"寻找你喜欢的商品",
+search:"搜索商品...",
+shipping:"不含运费",
+sizes:"尺码",
+copy:"复制商品链接",
+goated:"前往 GoatedBuy",
+copied:"链接已复制",
+no:"没有找到商品"
+},
+
+es:{
+hero:"Encuentra tus productos favoritos",
+search:"Buscar productos...",
+shipping:"envío no incluido",
+sizes:"Tallas",
+copy:"Copiar enlace",
+goated:"Ir a GoatedBuy",
+copied:"Enlace copiado",
+no:"No se encontraron productos"
+},
+
+de:{
+hero:"Finde deine Lieblingsprodukte",
+search:"Produkte suchen...",
+shipping:"Versand nicht enthalten",
+sizes:"Größen",
+copy:"Produktlink kopieren",
+goated:"Zu GoatedBuy",
+copied:"Link kopiert",
+no:"Keine Produkte gefunden"
+},
+
+fr:{
+hero:"Trouvez vos produits préférés",
+search:"Rechercher des produits...",
+shipping:"hors livraison",
+sizes:"Tailles",
+copy:"Copier le lien",
+goated:"Aller à GoatedBuy",
+copied:"Lien copié",
+no:"Aucun produit trouvé"
+},
+
+ja:{
+hero:"お気に入りの商品を見つけよう",
+search:"商品を検索...",
+shipping:"送料別",
+sizes:"サイズ",
+copy:"商品リンクをコピー",
+goated:"GoatedBuyへ",
+copied:"リンクをコピーしました",
+no:"商品が見つかりません"
+},
+
+ko:{
+hero:"좋아하는 상품을 찾아보세요",
+search:"상품 검색...",
+shipping:"배송비 별도",
+sizes:"사이즈",
+copy:"상품 링크 복사",
+goated:"GoatedBuy로 이동",
+copied:"링크가 복사되었습니다",
+no:"상품을 찾을 수 없습니다"
+}
+
+};
+
+let language="sv";
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function toggleSettings(){
+
+document
+.getElementById("settingsMenu")
+.classList.toggle("active");
+
+}
+
+function changeSettings(){
+
+language=
+document.getElementById("language").value;
+
+updateTexts();
+
+renderProducts();
+
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+function updateTexts(){
+
+const current=text[language];
+
+document
+.getElementById("heroText")
+.textContent=current.hero;
+
+document
+.getElementById("search")
+.placeholder=current.search;
+
+const currency=
+document.getElementById("currency").value;
+
+const names={
+sv:"🇸🇪 Svenska",
+en:"🇬🇧 English",
+zh:"🇨🇳 中文",
+es:"🇪🇸 Español",
+de:"🇩🇪 Deutsch",
+fr:"🇫🇷 Français",
+ja:"🇯🇵 日本語",
+ko:"🇰🇷 한국어"
+};
+
+document
+.getElementById("settingsButton")
+.textContent=
+"🌐 "+names[language]+" · "+currency;
+
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+function formatPrice(price){
+
+const currency=
+document.getElementById("currency").value;
+
+const converted=
+price*rates[currency];
+
+return converted.toLocaleString(
+language==="sv"?"sv-SE":"en-US",
+{
+maximumFractionDigits:2
+}
+)+" "+symbols[currency];
+
+}
+
+
+/* =========================================
+   PRODUCTS
+========================================= */
+
+function renderProducts(){
+
+const container=
+document.getElementById("products");
+
+const search=
+document.getElementById("search")
+.value
+.toLowerCase();
+
+container.innerHTML="";
+
+const filtered=
+products.filter(product=>
+product.name.toLowerCase().includes(search)
+);
+
+filtered.forEach(product=>{
+
+const card=
+document.createElement("div");
+
+card.className="product-card";
+
+card.onclick=()=>{
+openProduct(products.indexOf(product));
+};
+
+card.innerHTML=`
+
+<img
+class="product-image"
+src="${product.images[0]}"
+onerror="
+this.src='https://placehold.co/900x900?text=Bild+saknas'
+">
+
+<div class="product-info">
+
+<div class="product-name">
+${product.name}
+</div>
+
+<div class="product-price">
+${formatPrice(product.price)}
+
+<span class="shipping">
+${text[language].shipping}
+</span>
+
+</div>
+
+<div class="product-sizes">
+
+${product.sizes.map(size=>`
+<span class="size-small">${size}</span>
+`).join("")}
+
+</div>
+
+</div>
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+
+/* =========================================
+   PRODUCT PAGE
+========================================= */
+
+function openProduct(index){
+
+const product=
+products[index];
+
+const modal=
+document.getElementById("modal");
+
+const content=
+document.getElementById("modalContent");
+
+content.innerHTML=`
+
+<div class="modal-grid">
+
+<div class="gallery">
+
+<img
+id="mainImage"
+class="main-image"
+src="${product.images[0]}"
+onerror="
+this.src='https://placehold.co/900x900?text=Bild+saknas'
+">
+
+<div class="thumbnails">
+
+${product.images.map((image,i)=>`
+
+<img
+class="thumbnail ${i===0?"active":""}"
+src="${image}"
+onclick="changeImage(this,'${image}')"
+onerror="this.style.display='none'"
+>
+
+`).join("")}
+
+</div>
+
+</div>
+
+
+<div class="details">
+
+<h2>${product.name}</h2>
+
+<div class="big-price">
+${formatPrice(product.price)}
+</div>
+
+<div class="big-shipping">
+${text[language].shipping}
+</div>
+
+<div class="description">
+${product.description}
+</div>
+
+<div class="size-title">
+${text[language].sizes}
+</div>
+
+<div class="size-buttons">
+
+${product.sizes.map(size=>`
+
+<button
+class="size-button"
+onclick="selectSize(this)">
+${size}
+</button>
+
+`).join("")}
+
+</div>
+
+
+<button
+class="copy-button"
+onclick="copyLink('${product.link}')">
+
+${text[language].copy}
+
+</button>
+
+
+<a
+class="goated-button"
+href="${goatedBuyLink}"
+target="_blank">
+
+${text[language].goated}
+
+</a>
+
+
+<div
+class="copy-message"
+id="copyMessage">
+</div>
+
+</div>
+
+</div>
+`;
+
+modal.classList.add("active");
+
+}
+
+
+/* =========================================
+   IMAGE SWITCHER
+========================================= */
+
+function changeImage(button,image){
+
+document
+.getElementById("mainImage")
+.src=image;
+
+document
+.querySelectorAll(".thumbnail")
+.forEach(img=>{
+img.classList.remove("active");
+});
+
+button.classList.add("active");
+
+}
+
+
+/* =========================================
+   SIZE
+========================================= */
+
+function selectSize(button){
+
+document
+.querySelectorAll(".size-button")
+.forEach(btn=>{
+btn.classList.remove("selected");
+});
+
+button.classList.add("selected");
+
+}
+
+
+/* =========================================
+   COPY LINK
+========================================= */
+
+function copyLink(link){
+
+navigator.clipboard.writeText(link)
+.then(()=>{
+
+const message=
+document.getElementById("copyMessage");
+
+message.textContent=
+"✓ "+text[language].copied;
+
+});
+
+}
+
+
+/* =========================================
+   CLOSE
+========================================= */
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList.remove("active");
+
+}
+
+document
+.getElementById("modal")
+.addEventListener("click",function(event){
+
+if(event.target===this){
+closeModal();
+}
+
+});
+
+document.addEventListener("keydown",function(event){
+
+if(event.key==="Escape"){
+closeModal();
+}
+
+});
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+function closeWelcome(){
+
+document
+.getElementById("welcomePopup")
+.style.display="none";
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+updateTexts();
+renderProducts();
+
+</script>
+
+</body>
+</html>
+```
