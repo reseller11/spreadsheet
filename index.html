@@ -1,2003 +1,1566 @@
-
-
 !DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlexFynds</title>
-
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
 }
-
 :root{
-  --bg:#f5f5f5;
-  --card:#ffffff;
-  --text:#111111;
-  --muted:#777777;
-  --border:#e7e7e7;
-  --black:#111111;
+ --bg:#f5f5f5;
+ --card:#ffffff;
+ --text:#111111;
+ --muted:#777777;
+ --border:#e7e7e7;
+ --black:#111111;
 }
-
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
+ font-family:Arial,Helvetica,sans-serif;
+ background:var(--bg);
+ color:var(--text);
+ min-height:100vh;
 }
-
 button,
 input,
 select{
-  font:inherit;
+ font:inherit;
 }
-
 button{
-  cursor:pointer;
+ cursor:pointer;
 }
-
 a{
-  color:inherit;
-  text-decoration:none;
+ color:inherit;
+ text-decoration:none;
 }
-
 /* HEADER */
-
 header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
+ position:sticky;
+ top:0;
+ z-index:50;
+ background:rgba(255,255,255,.94);
+ backdrop-filter:blur(14px);
+ border-bottom:1px solid var(--border);
 }
-
 .header-inner{
-  max-width:1400px;
-  margin:auto;
-  padding:16px 22px;
-  display:flex;
-  align-items:center;
-  gap:18px;
+ max-width:1400px;
+ margin:auto;
+ padding:16px 22px;
+ display:flex;
+ align-items:center;
+ gap:18px;
 }
-
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  font-size:20px;
-  white-space:nowrap;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ font-weight:900;
+ font-size:20px;
+ white-space:nowrap;
 }
-
 .logo-box{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  background:#111;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:14px;
-  letter-spacing:-1px;
+ width:38px;
+ height:38px;
+ border-radius:10px;
+ background:#111;
+ color:white;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:14px;
+ letter-spacing:-1px;
 }
-
 .search-wrap{
-  flex:1;
-  max-width:650px;
-  margin:auto;
-  position:relative;
+ flex:1;
+ max-width:650px;
+ margin:auto;
+ position:relative;
 }
-
 .search{
-  width:100%;
-  border:1px solid var(--border);
-  background:#f7f7f7;
-  padding:13px 17px;
-  border-radius:14px;
-  outline:none;
-  transition:.2s;
+ width:100%;
+ border:1px solid var(--border);
+ background:#f7f7f7;
+ padding:13px 17px;
+ border-radius:14px;
+ outline:none;
+ transition:.2s;
 }
-
 .search:focus{
-  background:white;
-  border-color:#aaa;
+ background:white;
+ border-color:#aaa;
 }
-
 .controls{
-  display:flex;
-  gap:8px;
+ display:flex;
+ gap:8px;
 }
-
 .select{
-  border:1px solid var(--border);
-  background:white;
-  padding:10px 11px;
-  border-radius:11px;
-  outline:none;
+ border:1px solid var(--border);
+ background:white;
+ padding:10px 11px;
+ border-radius:11px;
+ outline:none;
 }
-
 /* HERO */
-
 .hero{
-  max-width:1400px;
-  margin:auto;
-  padding:55px 22px 25px;
+ max-width:1400px;
+ margin:auto;
+ padding:55px 22px 25px;
 }
-
 .hero-box{
-  background:#111;
-  color:white;
-  border-radius:24px;
-  padding:48px;
-  overflow:hidden;
-  position:relative;
+ background:#111;
+ color:white;
+ border-radius:24px;
+ padding:48px;
+ overflow:hidden;
+ position:relative;
 }
-
 .hero-box:after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:#333;
-  right:-100px;
-  top:-100px;
-  opacity:.5;
+ content:"";
+ position:absolute;
+ width:300px;
+ height:300px;
+ border-radius:50%;
+ background:#333;
+ right:-100px;
+ top:-100px;
+ opacity:.5;
 }
-
 .hero-content{
-  position:relative;
-  z-index:2;
+ position:relative;
+ z-index:2;
 }
-
 .hero h1{
-  font-size:clamp(36px,6vw,70px);
-  letter-spacing:-4px;
-  margin-bottom:12px;
+ font-size:clamp(36px,6vw,70px);
+ letter-spacing:-4px;
+ margin-bottom:12px;
 }
-
 .hero p{
-  color:#ccc;
-  max-width:600px;
-  font-size:17px;
-  line-height:1.6;
+ color:#ccc;
+ max-width:600px;
+ font-size:17px;
+ line-height:1.6;
 }
-
 /* PRODUCTS */
-
 .products-section{
-  max-width:1400px;
-  margin:auto;
-  padding:25px 22px 70px;
+ max-width:1400px;
+ margin:auto;
+ padding:25px 22px 70px;
 }
-
 .section-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:20px;
 }
-
 .section-top h2{
-  font-size:25px;
+ font-size:25px;
 }
-
 .product-count{
-  color:var(--muted);
-  font-size:14px;
+ color:var(--muted);
+ font-size:14px;
 }
-
 .grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:16px;
 }
-
 .product-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  transition:.2s;
-  cursor:pointer;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:18px;
+ overflow:hidden;
+ transition:.2s;
+ cursor:pointer;
 }
-
 .product-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 35px rgba(0,0,0,.08);
+ transform:translateY(-3px);
+ box-shadow:0 12px 35px rgba(0,0,0,.08);
 }
-
 .product-image{
-  aspect-ratio:1/1;
-  width:100%;
-  object-fit:cover;
-  background:#eee;
-  display:block;
+ aspect-ratio:1/1;
+ width:100%;
+ object-fit:cover;
+ background:#eee;
+ display:block;
 }
-
 .product-info{
-  padding:15px;
+ padding:15px;
 }
-
 .product-name{
-  font-weight:700;
-  margin-bottom:8px;
-  font-size:15px;
+ font-weight:700;
+ margin-bottom:8px;
+ font-size:15px;
 }
-
 .price{
-  font-weight:900;
-  font-size:17px;
-  margin-bottom:5px;
+ font-weight:900;
+ font-size:17px;
+ margin-bottom:5px;
 }
-
 .shipping{
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:9px;
+ color:var(--muted);
+ font-size:12px;
+ margin-bottom:9px;
 }
-
 .sizes{
-  color:#555;
-  font-size:12px;
-  line-height:1.5;
+ color:#555;
+ font-size:12px;
+ line-height:1.5;
 }
-
 /* MODAL */
-
 .modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:12px;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.65);
+ z-index:100;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:12px;
 }
-
 .modal.active{
-  display:flex;
+ display:flex;
 }
-
 .modal-box{
-  width:min(1100px,100%);
-  max-height:calc(100vh - 24px);
-  overflow:auto;
-  background:white;
-  border-radius:24px;
-  position:relative;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
+ width:min(1100px,100%);
+ max-height:calc(100vh - 24px);
+ overflow:auto;
+ background:white;
+ border-radius:24px;
+ position:relative;
+ display:grid;
+ grid-template-columns:1.05fr .95fr;
 }
-
 .close{
-  position:absolute;
-  right:15px;
-  top:15px;
-  z-index:5;
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:50%;
-  background:rgba(0,0,0,.75);
-  color:white;
-  font-size:22px;
+ position:absolute;
+ right:15px;
+ top:15px;
+ z-index:5;
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:50%;
+ background:rgba(0,0,0,.75);
+ color:white;
+ font-size:22px;
 }
-
 .gallery{
-  padding:22px;
-  background:#f4f4f4;
+ padding:22px;
+ background:#f4f4f4;
 }
-
 .main-image{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:contain;
-  background:white;
-  border-radius:18px;
+ width:100%;
+ aspect-ratio:1/1;
+ object-fit:contain;
+ background:white;
+ border-radius:18px;
 }
-
 .thumbnails{
-  display:flex;
-  gap:9px;
-  margin-top:10px;
-  overflow-x:auto;
-  padding-bottom:3px;
+ display:flex;
+ gap:9px;
+ margin-top:10px;
+ overflow-x:auto;
+ padding-bottom:3px;
 }
-
 .thumbnail{
-  flex:0 0 68px;
-  width:68px;
-  height:68px;
-  object-fit:cover;
-  border-radius:10px;
-  border:2px solid transparent;
-  cursor:pointer;
-  background:white;
+ flex:0 0 68px;
+ width:68px;
+ height:68px;
+ object-fit:cover;
+ border-radius:10px;
+ border:2px solid transparent;
+ cursor:pointer;
+ background:white;
 }
-
 .thumbnail.active{
-  border-color:#111;
+ border-color:#111;
 }
-
 .details{
-  padding:45px 30px 30px;
-  display:flex;
-  flex-direction:column;
+ padding:45px 30px 30px;
+ display:flex;
+ flex-direction:column;
 }
-
 .details h2{
-  font-size:30px;
-  margin-bottom:12px;
-  padding-right:35px;
+ font-size:30px;
+ margin-bottom:12px;
+ padding-right:35px;
 }
-
 .details-price{
-  font-size:25px;
-  font-weight:900;
-  margin-bottom:4px;
+ font-size:25px;
+ font-weight:900;
+ margin-bottom:4px;
 }
-
 .details-shipping{
-  color:#777;
-  font-size:13px;
-  margin-bottom:25px;
+ color:#777;
+ font-size:13px;
+ margin-bottom:25px;
 }
-
 .description{
-  color:#555;
-  line-height:1.65;
-  margin-bottom:24px;
+ color:#555;
+ line-height:1.65;
+ margin-bottom:24px;
 }
-
 .size-title{
-  font-weight:800;
-  margin-bottom:9px;
+ font-weight:800;
+ margin-bottom:9px;
 }
-
 .size-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-bottom:25px;
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-bottom:25px;
 }
-
 .size-pill{
-  border:1px solid #ddd;
-  padding:8px 11px;
-  border-radius:9px;
-  font-size:13px;
-  background:#fafafa;
+ border:1px solid #ddd;
+ padding:8px 11px;
+ border-radius:9px;
+ font-size:13px;
+ background:#fafafa;
 }
-
 .action{
-  width:100%;
-  border:0;
-  padding:14px;
-  border-radius:12px;
-  font-weight:800;
-  margin-top:8px;
+ width:100%;
+ border:0;
+ padding:14px;
+ border-radius:12px;
+ font-weight:800;
+ margin-top:8px;
 }
-
 .copy-btn{
-  background:#111;
-  color:white;
+ background:#111;
+ color:white;
 }
-
 .goated-btn{
-  background:#e8ff46;
-  color:#111;
+ background:#e8ff46;
+ color:#111;
 }
-
 .note{
-  color:#888;
-  font-size:11px;
-  text-align:center;
-  margin-top:9px;
+ color:#888;
+ font-size:11px;
+ text-align:center;
+ margin-top:9px;
 }
-
 /* POPUP */
-
 .welcome-overlay{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  background:rgba(0,0,0,.7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+ position:fixed;
+ inset:0;
+ z-index:200;
+ background:rgba(0,0,0,.7);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
 }
-
 .welcome{
-  width:min(520px,100%);
-  background:white;
-  border-radius:25px;
-  padding:32px;
-  position:relative;
-  box-shadow:0 30px 100px rgba(0,0,0,.3);
+ width:min(520px,100%);
+ background:white;
+ border-radius:25px;
+ padding:32px;
+ position:relative;
+ box-shadow:0 30px 100px rgba(0,0,0,.3);
 }
-
 .welcome-close{
-  position:absolute;
-  right:17px;
-  top:17px;
-  border:0;
-  background:#eee;
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  font-size:20px;
+ position:absolute;
+ right:17px;
+ top:17px;
+ border:0;
+ background:#eee;
+ width:35px;
+ height:35px;
+ border-radius:50%;
+ font-size:20px;
 }
-
 .welcome-logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:24px;
-  font-weight:900;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ margin-bottom:24px;
+ font-weight:900;
 }
-
 .welcome h2{
-  font-size:32px;
-  letter-spacing:-1px;
-  margin-bottom:9px;
+ font-size:32px;
+ letter-spacing:-1px;
+ margin-bottom:9px;
 }
-
 .welcome-sub{
-  color:#666;
-  line-height:1.5;
-  margin-bottom:22px;
+ color:#666;
+ line-height:1.5;
+ margin-bottom:22px;
 }
-
 .discount{
-  background:#111;
-  color:white;
-  border-radius:17px;
-  padding:20px;
-  margin-bottom:18px;
+ background:#111;
+ color:white;
+ border-radius:17px;
+ padding:20px;
+ margin-bottom:18px;
 }
-
 .discount strong{
-  font-size:27px;
-  display:block;
-  margin-bottom:5px;
+ font-size:27px;
+ display:block;
+ margin-bottom:5px;
 }
-
 .features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-bottom:20px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin-bottom:20px;
 }
-
 .feature{
-  background:#f5f5f5;
-  border-radius:12px;
-  padding:12px 8px;
-  text-align:center;
-  font-size:12px;
-  font-weight:700;
+ background:#f5f5f5;
+ border-radius:12px;
+ padding:12px 8px;
+ text-align:center;
+ font-size:12px;
+ font-weight:700;
 }
-
 .welcome-btn{
-  width:100%;
-  border:0;
-  border-radius:13px;
-  padding:14px;
-  font-weight:900;
-  margin-top:8px;
+ width:100%;
+ border:0;
+ border-radius:13px;
+ padding:14px;
+ font-weight:900;
+ margin-top:8px;
 }
-
 .login{
-  background:#e8ff46;
+ background:#e8ff46;
 }
-
 .browse{
-  background:#111;
-  color:white;
+ background:#111;
+ color:white;
 }
-
 .disclaimer{
-  text-align:center;
-  color:#999;
-  font-size:10px;
-  margin-top:13px;
+ text-align:center;
+ color:#999;
+ font-size:10px;
+ margin-top:13px;
 }
-
 /* FOOTER */
-
 footer{
-  background:#111;
-  color:white;
-  padding:45px 22px;
+ background:#111;
+ color:white;
+ padding:45px 22px;
 }
-
 .footer-inner{
-  max-width:1400px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  gap:30px;
-  flex-wrap:wrap;
+ max-width:1400px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ gap:30px;
+ flex-wrap:wrap;
 }
-
 .footer-logo{
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:8px;
+ font-size:22px;
+ font-weight:900;
+ margin-bottom:8px;
 }
-
 .footer-text{
-  color:#999;
-  font-size:13px;
+ color:#999;
+ font-size:13px;
 }
-
 .socials{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
 }
-
 .social{
-  border:1px solid #333;
-  padding:10px 13px;
-  border-radius:10px;
-  color:#ddd;
-  font-size:13px;
+ border:1px solid #333;
+ padding:10px 13px;
+ border-radius:10px;
+ color:#ddd;
+ font-size:13px;
 }
-
 /* NO RESULTS */
-
 .no-results{
-  display:none;
-  text-align:center;
-  padding:70px 20px;
-  color:#777;
+ display:none;
+ text-align:center;
+ padding:70px 20px;
+ color:#777;
 }
-
 /* MOBILE */
-
 @media(max-width:1000px){
-  .grid{
-    grid-template-columns:repeat(3,1fr);
-  }
+ .grid{
+   grid-template-columns:repeat(3,1fr);
+ }
 }
-
 @media(max-width:750px){
-  .header-inner{
-    flex-wrap:wrap;
-  }
-
-  .logo{
-    order:1;
-  }
-
-  .controls{
-    order:2;
-    margin-left:auto;
-  }
-
-  .search-wrap{
-    order:3;
-    flex-basis:100%;
-  }
-
-  .hero{
-    padding-top:20px;
-  }
-
-  .hero-box{
-    padding:32px 25px;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
-
-  .product-info{
-    padding:12px;
-  }
-
-  .modal-box{
-    grid-template-columns:1fr;
-    max-height:calc(100vh - 10px);
-    border-radius:20px;
-  }
-
-  .gallery{
-    padding:12px;
-  }
-
-  .main-image{
-    max-height:42vh;
-  }
-
-  .details{
-    padding:22px 18px 22px;
-  }
-
-  .details h2{
-    font-size:24px;
-  }
-
-  .features{
-    grid-template-columns:1fr 1fr 1fr;
-  }
+ .header-inner{
+   flex-wrap:wrap;
+ }
+ .logo{
+   order:1;
+ }
+ .controls{
+   order:2;
+   margin-left:auto;
+ }
+ .search-wrap{
+   order:3;
+   flex-basis:100%;
+ }
+ .hero{
+   padding-top:20px;
+ }
+ .hero-box{
+   padding:32px 25px;
+ }
+ .grid{
+   grid-template-columns:repeat(2,1fr);
+   gap:10px;
+ }
+ .product-info{
+   padding:12px;
+ }
+ .modal-box{
+   grid-template-columns:1fr;
+   max-height:calc(100vh - 10px);
+   border-radius:20px;
+ }
+ .gallery{
+   padding:12px;
+ }
+ .main-image{
+   max-height:42vh;
+ }
+ .details{
+   padding:22px 18px 22px;
+ }
+ .details h2{
+   font-size:24px;
+ }
+ .features{
+   grid-template-columns:1fr 1fr 1fr;
+ }
 }
-
 @media(max-width:430px){
-  .controls{
-    width:100%;
-  }
-
-  .select{
-    flex:1;
-  }
-
-  .hero h1{
-    letter-spacing:-2px;
-  }
-
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .product-name{
-    font-size:13px;
-  }
-
-  .price{
-    font-size:15px;
-  }
-
-  .welcome{
-    padding:25px 20px;
-  }
-
-  .welcome h2{
-    font-size:27px;
-  }
+ .controls{
+   width:100%;
+ }
+ .select{
+   flex:1;
+ }
+ .hero h1{
+   letter-spacing:-2px;
+ }
+ .grid{
+   grid-template-columns:repeat(2,1fr);
+ }
+ .product-name{
+   font-size:13px;
+ }
+ .price{
+   font-size:15px;
+ }
+ .welcome{
+   padding:25px 20px;
+ }
+ .welcome h2{
+   font-size:27px;
+ }
 }
 </style>
 </head>
-
 <body>
-
 <!-- HEADER -->
-
 <header>
-  <div class="header-inner">
-
-    <a href="#" class="logo">
-      <span class="logo-box">AF</span>
-      <span>AlexFynds</span>
-    </a>
-
-    <div class="search-wrap">
-      <input
-        id="search"
-        class="search"
-        type="search"
-        placeholder="Sök produkter..."
-      >
-    </div>
-
-    <div class="controls">
-      <select id="language" class="select">
-        <option value="sv">🇸🇪 Svenska</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="zh">🇨🇳 中文</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="de">🇩🇪 Deutsch</option>
-        <option value="fr">🇫🇷 Français</option>
-        <option value="ja">🇯🇵 日本語</option>
-        <option value="ko">🇰🇷 한국어</option>
-      </select>
-
-      <select id="currency" class="select">
-        <option value="SEK">SEK</option>
-        <option value="EUR">EUR</option>
-        <option value="USD">USD</option>
-        <option value="GBP">GBP</option>
-        <option value="CNY">CNY</option>
-        <option value="JPY">JPY</option>
-        <option value="CHF">CHF</option>
-        <option value="NOK">NOK</option>
-        <option value="DKK">DKK</option>
-        <option value="PLN">PLN</option>
-      </select>
-    </div>
-
-  </div>
+<div class="header-inner">
+<a href="#" class="logo">
+<span class="logo-box">AF</span>
+<span>AlexFynds</span>
+</a>
+<div class="search-wrap">
+<input
+       id="search"
+       class="search"
+       type="search"
+       placeholder="Sök produkter..."
+>
+</div>
+<div class="controls">
+<select id="language" class="select">
+<option value="sv">🇸🇪 Svenska</option>
+<option value="en">🇬🇧 English</option>
+<option value="zh">🇨🇳 中文</option>
+<option value="es">🇪🇸 Español</option>
+<option value="de">🇩🇪 Deutsch</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="ja">🇯🇵 日本語</option>
+<option value="ko">🇰🇷 한국어</option>
+</select>
+<select id="currency" class="select">
+<option value="SEK">SEK</option>
+<option value="EUR">EUR</option>
+<option value="USD">USD</option>
+<option value="GBP">GBP</option>
+<option value="CNY">CNY</option>
+<option value="JPY">JPY</option>
+<option value="CHF">CHF</option>
+<option value="NOK">NOK</option>
+<option value="DKK">DKK</option>
+<option value="PLN">PLN</option>
+</select>
+</div>
+</div>
 </header>
 
-
 <!-- HERO -->
-
 <section class="hero">
-  <div class="hero-box">
-    <div class="hero-content">
-      <h1>AlexFynds</h1>
-      <p id="heroText">
-        Hitta produkter, jämför fynd och gå direkt till produktlänken.
-        Enkelt, snabbt och utan onödigt krångel.
-      </p>
-    </div>
-  </div>
+<div class="hero-box">
+<div class="hero-content">
+<h1>AlexFynds</h1>
+<p id="heroText">
+       Hitta produkter, jämför fynd och gå direkt till produktlänken.
+       Enkelt, snabbt och utan onödigt krångel.
+</p>
+</div>
+</div>
 </section>
-
 
 <!-- PRODUCTS -->
-
 <section class="products-section">
-
-  <div class="section-top">
-    <h2 id="productsTitle">Alla fynd</h2>
-    <span id="productCount" class="product-count"></span>
-  </div>
-
-  <div id="productsGrid" class="grid"></div>
-
-  <div id="noResults" class="no-results">
-    <h3>Inga produkter hittades</h3>
-    <p>Testa ett annat sökord.</p>
-  </div>
-
+<div class="section-top">
+<h2 id="productsTitle">Alla fynd</h2>
+<span id="productCount" class="product-count"></span>
+</div>
+<div id="productsGrid" class="grid"></div>
+<div id="noResults" class="no-results">
+<h3>Inga produkter hittades</h3>
+<p>Testa ett annat sökord.</p>
+</div>
 </section>
 
-
 <!-- PRODUCT MODAL -->
-
 <div id="productModal" class="modal">
-
-  <div class="modal-box">
-
-    <button class="close" onclick="closeModal()">×</button>
-
-    <div class="gallery">
-
-      <img
-        id="mainImage"
-        class="main-image"
-        src=""
-        alt="Produktbild"
-      >
-
-      <div id="thumbnails" class="thumbnails"></div>
-
-    </div>
-
-    <div class="details">
-
-      <h2 id="modalName"></h2>
-
-      <div id="modalPrice" class="details-price"></div>
-
-      <div class="details-shipping">
-        exkl. frakt
-      </div>
-
-      <div id="modalDescription" class="description"></div>
-
-      <div class="size-title">
-        Tillgängliga storlekar
-      </div>
-
-      <div id="modalSizes" class="size-list"></div>
-
-      <button
-        id="copyButton"
-        class="action copy-btn"
-        onclick="copyProductLink()"
-      >
-        Kopiera produktlänk
-      </button>
-
-      <a
-        id="goatedButton"
-        class="action goated-btn"
-        href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Gå till GoatedBuy
-      </a>
-
-      <div class="note">
-        Produktlänken kopieras så att du enkelt kan använda den vidare.
-      </div>
-
-    </div>
-
-  </div>
-
+<div class="modal-box">
+<button class="close" onclick="closeModal()">×</button>
+<div class="gallery">
+<img
+       id="mainImage"
+       class="main-image"
+       src=""
+       alt="Produktbild"
+>
+<div id="thumbnails" class="thumbnails"></div>
 </div>
-
+<div class="details">
+<h2 id="modalName"></h2>
+<div id="modalPrice" class="details-price"></div>
+<div class="details-shipping">
+       exkl. frakt
+</div>
+<div id="modalDescription" class="description"></div>
+<div class="size-title">
+       Tillgängliga storlekar
+</div>
+<div id="modalSizes" class="size-list"></div>
+<button
+       id="copyButton"
+       class="action copy-btn"
+       onclick="copyProductLink()"
+>
+       Kopiera produktlänk
+</button>
+<a
+       id="goatedButton"
+       class="action goated-btn"
+       href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
+       target="_blank"
+       rel="noopener noreferrer"
+>
+       Gå till GoatedBuy
+</a>
+<div class="note">
+       Produktlänken kopieras så att du enkelt kan använda den vidare.
+</div>
+</div>
+</div>
+</div>
 
 <!-- WELCOME POPUP -->
-
 <div id="welcomeOverlay" class="welcome-overlay">
-
-  <div class="welcome">
-
-    <button
-      class="welcome-close"
-      onclick="closeWelcome()"
-    >
-      ×
-    </button>
-
-    <div class="welcome-logo">
-      <span class="logo-box">AF</span>
-      <span>AlexFynds</span>
-    </div>
-
-    <h2>VÄLKOMMEN TILL ALEXFYNDS</h2>
-
-    <p class="welcome-sub">
-      Redo att hitta fynden? Här samlar vi produkter och
-      produktlänkar på ett enkelt ställe.
-    </p>
-
-    <div class="discount">
-      <strong>15% rabatt</strong>
-      på ditt första köp hos GoatedBuy
-    </div>
-
-    <div class="features">
-      <div class="feature">
-        🔎<br>
-        Produktfynd
-      </div>
-
-      <div class="feature">
-        📏<br>
-        Flera storlekar
-      </div>
-
-      <div class="feature">
-        🔗<br>
-        Produktlänkar
-      </div>
-    </div>
-
-    <a
-      class="welcome-btn login"
-      href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Logga in på GoatedBuy
-    </a>
-
-    <button
-      class="welcome-btn browse"
-      onclick="closeWelcome()"
-    >
-      Bläddra bland fynden
-    </button>
-
-    <div class="disclaimer">
-      Rabatt gäller enligt aktuella villkor hos GoatedBuy
-    </div>
-
-  </div>
-
+<div class="welcome">
+<button
+     class="welcome-close"
+     onclick="closeWelcome()"
+>
+     ×
+</button>
+<div class="welcome-logo">
+<span class="logo-box">AF</span>
+<span>AlexFynds</span>
+</div>
+<h2>VÄLKOMMEN TILL ALEXFYNDS</h2>
+<p class="welcome-sub">
+     Redo att hitta fynden? Här samlar vi produkter och
+     produktlänkar på ett enkelt ställe.
+</p>
+<div class="discount">
+<strong>15% rabatt</strong>
+     på ditt första köp hos GoatedBuy
+</div>
+<div class="features">
+<div class="feature">
+       🔎<br>
+       Produktfynd
+</div>
+<div class="feature">
+       📏<br>
+       Flera storlekar
+</div>
+<div class="feature">
+       🔗<br>
+       Produktlänkar
+</div>
+</div>
+<a
+     class="welcome-btn login"
+     href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
+     target="_blank"
+     rel="noopener noreferrer"
+>
+     Logga in på GoatedBuy
+</a>
+<button
+     class="welcome-btn browse"
+     onclick="closeWelcome()"
+>
+     Bläddra bland fynden
+</button>
+<div class="disclaimer">
+     Rabatt gäller enligt aktuella villkor hos GoatedBuy
+</div>
+</div>
 </div>
 
-
 <!-- FOOTER -->
-
 <footer>
-
-  <div class="footer-inner">
-
-    <div>
-      <div class="footer-logo">
-        AlexFynds
-      </div>
-
-      <div class="footer-text">
-        Fynd. Produkter. Länkar.
-      </div>
-    </div>
-
-    <div class="socials">
-
-      <a
-        class="social"
-        href="https://www.tiktok.com/@alexfynds"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        TikTok
-      </a>
-
-      <a
-        class="social"
-        href="https://www.instagram.com/alexfynds?igsi=c2dmMDg2YWplcXox&utm_source=qr"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Instagram
-      </a>
-
-      <a
-        class="social"
-        href="DIN_DISCORD_LÄNK"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Discord
-      </a>
-
-    </div>
-
-  </div>
-
+<div class="footer-inner">
+<div>
+<div class="footer-logo">
+       AlexFynds
+</div>
+<div class="footer-text">
+       Fynd. Produkter. Länkar.
+</div>
+</div>
+<div class="socials">
+<a
+       class="social"
+       href="https://www.tiktok.com/@alexfynds"
+       target="_blank"
+       rel="noopener noreferrer"
+>
+       TikTok
+</a>
+<a
+       class="social"
+       href="https://www.instagram.com/alexfynds?igsi=c2dmMDg2YWplcXox&utm_source=qr"
+       target="_blank"
+       rel="noopener noreferrer"
+>
+       Instagram
+</a>
+<a
+       class="social"
+       href="DIN_DISCORD_LÄNK"
+       target="_blank"
+       rel="noopener noreferrer"
+>
+       Discord
+</a>
+</div>
+</div>
 </footer>
 
-
 <script>
-
 /*
 ========================================================
 ALEXFYNDS
 PRODUKTER
-
 HÄR ÄNDRAR DU PRODUKTERNA.
-
 Produkt 01 = första produkten
 Produkt 02 = andra produkten
 osv.
-
 price anges i SEK.
-
 images:
 Lägg bilderna i en mapp som heter "images".
-
 Exempel:
-
 images/produkt01.jpg
 images/produkt01-2.jpg
 images/produkt01-3.jpg
 images/produkt01-4.jpg
 images/produkt01-5.jpg
 images/produkt01-6.jpg
-
 ========================================================
 */
-
 
 const GOATEDBUY_URL =
 "https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds";
 
-
 const PRODUCTS = [
-
 /* ================= PRODUCT 01 ================= */
-
 {
-  name:"Maison Margiela GATS",
-  price:520,
-  description:"WEIDIAN Maison margiela GATS, väger 1240g.",
-  sizes:["38","39","40","41","42","43","44","45","46"],
-  images:[
-    "images/produkt01.jpg",
-    "images/produkt01-2.jpg",
-    "images/produkt01-3.jpg",
-    "images/produkt01-4.jpg",
-    "images/produkt01-5.jpg",
-    "images/produkt01-6.jpg"
-  ],
-  link:"https://weidian.com/item.html?itemID=7779545401"
+ name:"Produkt 01",
+ price:299,
+ description:"Beskrivning för Produkt 01. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt01.jpg",
+   "images/produkt01-2.jpg",
+   "images/produkt01-3.jpg",
+   "images/produkt01-4.jpg",
+   "images/produkt01-5.jpg",
+   "images/produkt01-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 02 ================= */
-
 {
-  name:"Produkt 02",
-  price:299,
-  description:"Beskrivning för Produkt 02. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt02.jpg",
-    "images/produkt02-2.jpg",
-    "images/produkt02-3.jpg",
-    "images/produkt02-4.jpg",
-    "images/produkt02-5.jpg",
-    "images/produkt02-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 02",
+ price:299,
+ description:"Beskrivning för Produkt 02. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt02.jpg",
+   "images/produkt02-2.jpg",
+   "images/produkt02-3.jpg",
+   "images/produkt02-4.jpg",
+   "images/produkt02-5.jpg",
+   "images/produkt02-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 03 ================= */
-
 {
-  name:"Produkt 03",
-  price:299,
-  description:"Beskrivning för Produkt 03. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt03.jpg",
-    "images/produkt03-2.jpg",
-    "images/produkt03-3.jpg",
-    "images/produkt03-4.jpg",
-    "images/produkt03-5.jpg",
-    "images/produkt03-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 03",
+ price:299,
+ description:"Beskrivning för Produkt 03. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt03.jpg",
+   "images/produkt03-2.jpg",
+   "images/produkt03-3.jpg",
+   "images/produkt03-4.jpg",
+   "images/produkt03-5.jpg",
+   "images/produkt03-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 04 ================= */
-
 {
-  name:"Produkt 04",
-  price:299,
-  description:"Beskrivning för Produkt 04. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt04.jpg",
-    "images/produkt04-2.jpg",
-    "images/produkt04-3.jpg",
-    "images/produkt04-4.jpg",
-    "images/produkt04-5.jpg",
-    "images/produkt04-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 04",
+ price:299,
+ description:"Beskrivning för Produkt 04. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt04.jpg",
+   "images/produkt04-2.jpg",
+   "images/produkt04-3.jpg",
+   "images/produkt04-4.jpg",
+   "images/produkt04-5.jpg",
+   "images/produkt04-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 05 ================= */
-
 {
-  name:"Produkt 05",
-  price:299,
-  description:"Beskrivning för Produkt 05. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt05.jpg",
-    "images/produkt05-2.jpg",
-    "images/produkt05-3.jpg",
-    "images/produkt05-4.jpg",
-    "images/produkt05-5.jpg",
-    "images/produkt05-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 05",
+ price:299,
+ description:"Beskrivning för Produkt 05. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt05.jpg",
+   "images/produkt05-2.jpg",
+   "images/produkt05-3.jpg",
+   "images/produkt05-4.jpg",
+   "images/produkt05-5.jpg",
+   "images/produkt05-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 06 ================= */
-
 {
-  name:"Produkt 06",
-  price:299,
-  description:"Beskrivning för Produkt 06. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt06.jpg",
-    "images/produkt06-2.jpg",
-    "images/produkt06-3.jpg",
-    "images/produkt06-4.jpg",
-    "images/produkt06-5.jpg",
-    "images/produkt06-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 06",
+ price:299,
+ description:"Beskrivning för Produkt 06. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt06.jpg",
+   "images/produkt06-2.jpg",
+   "images/produkt06-3.jpg",
+   "images/produkt06-4.jpg",
+   "images/produkt06-5.jpg",
+   "images/produkt06-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 07 ================= */
-
 {
-  name:"Produkt 07",
-  price:299,
-  description:"Beskrivning för Produkt 07. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt07.jpg",
-    "images/produkt07-2.jpg",
-    "images/produkt07-3.jpg",
-    "images/produkt07-4.jpg",
-    "images/produkt07-5.jpg",
-    "images/produkt07-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 07",
+ price:299,
+ description:"Beskrivning för Produkt 07. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt07.jpg",
+   "images/produkt07-2.jpg",
+   "images/produkt07-3.jpg",
+   "images/produkt07-4.jpg",
+   "images/produkt07-5.jpg",
+   "images/produkt07-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 08 ================= */
-
 {
-  name:"Produkt 08",
-  price:299,
-  description:"Beskrivning för Produkt 08. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt08.jpg",
-    "images/produkt08-2.jpg",
-    "images/produkt08-3.jpg",
-    "images/produkt08-4.jpg",
-    "images/produkt08-5.jpg",
-    "images/produkt08-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 08",
+ price:299,
+ description:"Beskrivning för Produkt 08. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt08.jpg",
+   "images/produkt08-2.jpg",
+   "images/produkt08-3.jpg",
+   "images/produkt08-4.jpg",
+   "images/produkt08-5.jpg",
+   "images/produkt08-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 09 ================= */
-
 {
-  name:"Produkt 09",
-  price:299,
-  description:"Beskrivning för Produkt 09. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt09.jpg",
-    "images/produkt09-2.jpg",
-    "images/produkt09-3.jpg",
-    "images/produkt09-4.jpg",
-    "images/produkt09-5.jpg",
-    "images/produkt09-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 09",
+ price:299,
+ description:"Beskrivning för Produkt 09. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt09.jpg",
+   "images/produkt09-2.jpg",
+   "images/produkt09-3.jpg",
+   "images/produkt09-4.jpg",
+   "images/produkt09-5.jpg",
+   "images/produkt09-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 },
-
 /* ================= PRODUCT 10 ================= */
-
 {
-  name:"Produkt 10",
-  price:299,
-  description:"Beskrivning för Produkt 10. Byt ut denna text mot information om produkten.",
-  sizes:["S","M","L","XL"],
-  images:[
-    "images/produkt10.jpg",
-    "images/produkt10-2.jpg",
-    "images/produkt10-3.jpg",
-    "images/produkt10-4.jpg",
-    "images/produkt10-5.jpg",
-    "images/produkt10-6.jpg"
-  ],
-  link:"DIN_PRODUKTLÄNK_HÄR"
+ name:"Produkt 10",
+ price:299,
+ description:"Beskrivning för Produkt 10. Byt ut denna text mot information om produkten.",
+ sizes:["S","M","L","XL"],
+ images:[
+   "images/produkt10.jpg",
+   "images/produkt10-2.jpg",
+   "images/produkt10-3.jpg",
+   "images/produkt10-4.jpg",
+   "images/produkt10-5.jpg",
+   "images/produkt10-6.jpg"
+ ],
+ link:"DIN_PRODUKTLÄNK_HÄR"
 }
-
 ];
-
 
 /*
 ========================================================
 PRODUKT 11–200
 ========================================================
-
 De skapas automatiskt här.
-
 Du kan fortfarande ändra varje produkt genom att
 ändra objektet i denna loop eller ersätta med egna
 produktobjekt precis som ovan.
 ========================================================
 */
-
 for(let i=11;i<=200;i++){
-
-  const number =
-    String(i).padStart(2,"0");
-
-  PRODUCTS.push({
-
-    name:`Produkt ${number}`,
-
-    price:299,
-
-    description:
-      `Beskrivning för Produkt ${number}. Byt ut denna text mot information om produkten.`,
-
-    sizes:[
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-
-    images:[
-      `images/produkt${number}.jpg`,
-      `images/produkt${number}-2.jpg`,
-      `images/produkt${number}-3.jpg`,
-      `images/produkt${number}-4.jpg`,
-      `images/produkt${number}-5.jpg`,
-      `images/produkt${number}-6.jpg`
-    ],
-
-    link:
-      "DIN_PRODUKTLÄNK_HÄR"
-
-  });
-
+ const number =
+   String(i).padStart(2,"0");
+ PRODUCTS.push({
+   name:`Produkt ${number}`,
+   price:299,
+   description:
+     `Beskrivning för Produkt ${number}. Byt ut denna text mot information om produkten.`,
+   sizes:[
+     "S",
+     "M",
+     "L",
+     "XL"
+   ],
+   images:[
+     `images/produkt${number}.jpg`,
+     `images/produkt${number}-2.jpg`,
+     `images/produkt${number}-3.jpg`,
+     `images/produkt${number}-4.jpg`,
+     `images/produkt${number}-5.jpg`,
+     `images/produkt${number}-6.jpg`
+   ],
+   link:
+     "DIN_PRODUKTLÄNK_HÄR"
+ });
 }
-
 
 /*
 ========================================================
 SPRÅK
 ========================================================
 */
-
 const translations = {
-
-  sv:{
-    search:"Sök produkter...",
-    hero:"Hitta produkter, jämför fynd och gå direkt till produktlänken. Enkelt, snabbt och utan onödigt krångel.",
-    products:"Alla fynd",
-    copy:"Kopiera produktlänk",
-    copied:"Länk kopierad!",
-    goated:"Gå till GoatedBuy",
-    sizes:"Tillgängliga storlekar",
-    noResults:"Inga produkter hittades"
-  },
-
-  en:{
-    search:"Search products...",
-    hero:"Find products, discover deals and go directly to the product link. Simple, fast and easy.",
-    products:"All finds",
-    copy:"Copy product link",
-    copied:"Link copied!",
-    goated:"Go to GoatedBuy",
-    sizes:"Available sizes",
-    noResults:"No products found"
-  },
-
-  zh:{
-    search:"搜索产品...",
-    hero:"发现产品、寻找优惠，并直接进入产品链接。",
-    products:"所有商品",
-    copy:"复制产品链接",
-    copied:"链接已复制！",
-    goated:"前往 GoatedBuy",
-    sizes:"可用尺码",
-    noResults:"没有找到产品"
-  },
-
-  es:{
-    search:"Buscar productos...",
-    hero:"Encuentra productos, descubre ofertas y accede directamente al enlace.",
-    products:"Todos los productos",
-    copy:"Copiar enlace",
-    copied:"¡Enlace copiado!",
-    goated:"Ir a GoatedBuy",
-    sizes:"Tallas disponibles",
-    noResults:"No se encontraron productos"
-  },
-
-  de:{
-    search:"Produkte suchen...",
-    hero:"Produkte finden, Angebote entdecken und direkt zum Produktlink gehen.",
-    products:"Alle Angebote",
-    copy:"Produktlink kopieren",
-    copied:"Link kopiert!",
-    goated:"Zu GoatedBuy",
-    sizes:"Verfügbare Größen",
-    noResults:"Keine Produkte gefunden"
-  },
-
-  fr:{
-    search:"Rechercher des produits...",
-    hero:"Trouvez des produits, découvrez des offres et accédez directement au lien.",
-    products:"Toutes les trouvailles",
-    copy:"Copier le lien",
-    copied:"Lien copié !",
-    goated:"Aller à GoatedBuy",
-    sizes:"Tailles disponibles",
-    noResults:"Aucun produit trouvé"
-  },
-
-  ja:{
-    search:"商品を検索...",
-    hero:"商品を見つけて、お得な商品をチェックし、リンクへ直接アクセスできます。",
-    products:"すべての商品",
-    copy:"商品リンクをコピー",
-    copied:"リンクをコピーしました！",
-    goated:"GoatedBuyへ",
-    sizes:"利用可能なサイズ",
-    noResults:"商品が見つかりません"
-  },
-
-  ko:{
-    search:"제품 검색...",
-    hero:"제품과 딜을 찾아보고 제품 링크로 바로 이동하세요.",
-    products:"모든 상품",
-    copy:"제품 링크 복사",
-    copied:"링크가 복사되었습니다!",
-    goated:"GoatedBuy로 이동",
-    sizes:"사용 가능한 사이즈",
-    noResults:"제품을 찾을 수 없습니다"
-  }
-
+ sv:{
+   search:"Sök produkter...",
+   hero:"Hitta produkter, jämför fynd och gå direkt till produktlänken. Enkelt, snabbt och utan onödigt krångel.",
+   products:"Alla fynd",
+   copy:"Kopiera produktlänk",
+   copied:"Länk kopierad!",
+   goated:"Gå till GoatedBuy",
+   sizes:"Tillgängliga storlekar",
+   noResults:"Inga produkter hittades"
+ },
+ en:{
+   search:"Search products...",
+   hero:"Find products, discover deals and go directly to the product link. Simple, fast and easy.",
+   products:"All finds",
+   copy:"Copy product link",
+   copied:"Link copied!",
+   goated:"Go to GoatedBuy",
+   sizes:"Available sizes",
+   noResults:"No products found"
+ },
+ zh:{
+   search:"搜索产品...",
+   hero:"发现产品、寻找优惠，并直接进入产品链接。",
+   products:"所有商品",
+   copy:"复制产品链接",
+   copied:"链接已复制！",
+   goated:"前往 GoatedBuy",
+   sizes:"可用尺码",
+   noResults:"没有找到产品"
+ },
+ es:{
+   search:"Buscar productos...",
+   hero:"Encuentra productos, descubre ofertas y accede directamente al enlace.",
+   products:"Todos los productos",
+   copy:"Copiar enlace",
+   copied:"¡Enlace copiado!",
+   goated:"Ir a GoatedBuy",
+   sizes:"Tallas disponibles",
+   noResults:"No se encontraron productos"
+ },
+ de:{
+   search:"Produkte suchen...",
+   hero:"Produkte finden, Angebote entdecken und direkt zum Produktlink gehen.",
+   products:"Alle Angebote",
+   copy:"Produktlink kopieren",
+   copied:"Link kopiert!",
+   goated:"Zu GoatedBuy",
+   sizes:"Verfügbare Größen",
+   noResults:"Keine Produkte gefunden"
+ },
+ fr:{
+   search:"Rechercher des produits...",
+   hero:"Trouvez des produits, découvrez des offres et accédez directement au lien.",
+   products:"Toutes les trouvailles",
+   copy:"Copier le lien",
+   copied:"Lien copié !",
+   goated:"Aller à GoatedBuy",
+   sizes:"Tailles disponibles",
+   noResults:"Aucun produit trouvé"
+ },
+ ja:{
+   search:"商品を検索...",
+   hero:"商品を見つけて、お得な商品をチェックし、リンクへ直接アクセスできます。",
+   products:"すべての商品",
+   copy:"商品リンクをコピー",
+   copied:"リンクをコピーしました！",
+   goated:"GoatedBuyへ",
+   sizes:"利用可能なサイズ",
+   noResults:"商品が見つかりません"
+ },
+ ko:{
+   search:"제품 검색...",
+   hero:"제품과 딜을 찾아보고 제품 링크로 바로 이동하세요.",
+   products:"모든 상품",
+   copy:"제품 링크 복사",
+   copied:"링크가 복사되었습니다!",
+   goated:"GoatedBuy로 이동",
+   sizes:"사용 가능한 사이즈",
+   noResults:"제품을 찾을 수 없습니다"
+ }
 };
-
 
 /*
 ========================================================
 VALUTOR
-
 Priserna i PRODUCTS är SEK.
-
 Detta är exempelkurser och inte livekurser.
 ========================================================
 */
-
 const currencyRates = {
-
-  SEK:1,
-
-  EUR:0.091,
-
-  USD:0.107,
-
-  GBP:0.078,
-
-  CNY:0.77,
-
-  JPY:15.7,
-
-  CHF:0.085,
-
-  NOK:1.08,
-
-  DKK:0.68,
-
-  PLN:0.39
-
+ SEK:1,
+ EUR:0.091,
+ USD:0.107,
+ GBP:0.078,
+ CNY:0.77,
+ JPY:15.7,
+ CHF:0.085,
+ NOK:1.08,
+ DKK:0.68,
+ PLN:0.39
 };
-
 
 const currencySymbols = {
-
-  SEK:"kr",
-
-  EUR:"€",
-
-  USD:"$",
-
-  GBP:"£",
-
-  CNY:"¥",
-
-  JPY:"¥",
-
-  CHF:"CHF",
-
-  NOK:"kr",
-
-  DKK:"kr",
-
-  PLN:"zł"
-
+ SEK:"kr",
+ EUR:"€",
+ USD:"$",
+ GBP:"£",
+ CNY:"¥",
+ JPY:"¥",
+ CHF:"CHF",
+ NOK:"kr",
+ DKK:"kr",
+ PLN:"zł"
 };
-
 
 let currentCurrency = "SEK";
 let currentLanguage = "sv";
 let currentProduct = null;
-
 
 /*
 ========================================================
 FORMATERA PRIS
 ========================================================
 */
-
 function formatPrice(price){
-
-  const converted =
-    price * currencyRates[currentCurrency];
-
-  const symbol =
-    currencySymbols[currentCurrency];
-
-  if(currentCurrency === "JPY"){
-    return `${Math.round(converted)} ${symbol}`;
-  }
-
-  return `${converted.toFixed(2)} ${symbol}`;
-
+ const converted =
+   price * currencyRates[currentCurrency];
+ const symbol =
+   currencySymbols[currentCurrency];
+ if(currentCurrency === "JPY"){
+   return `${Math.round(converted)} ${symbol}`;
+ }
+ return `${converted.toFixed(2)} ${symbol}`;
 }
-
 
 /*
 ========================================================
 BILD FALLBACK
 ========================================================
 */
-
 function safeImage(src){
-
-  return src;
-
+ return src;
 }
-
 
 /*
 ========================================================
 RENDER PRODUCTS
 ========================================================
 */
-
 function renderProducts(){
+ const grid =
+   document.getElementById("productsGrid");
+ const search =
+   document.getElementById("search").value
+     .toLowerCase()
+     .trim();
+ grid.innerHTML = "";
+ const filtered =
+   PRODUCTS.filter(product => {
+     const text =
+       (
+         product.name +
+         " " +
+         product.description
+       ).toLowerCase();
+     return text.includes(search);
+   });
+ document.getElementById("productCount").textContent =
+   `${filtered.length} / ${PRODUCTS.length}`;
+ document.getElementById("noResults").style.display =
+   filtered.length === 0 ? "block" : "none";
 
-  const grid =
-    document.getElementById("productsGrid");
+ filtered.forEach((product,index)=>{
+   const card =
+     document.createElement("div");
+   card.className =
+     "product-card";
+   card.onclick = () =>
+     openProduct(product);
 
-  const search =
-    document.getElementById("search").value
-      .toLowerCase()
-      .trim();
+   const image =
+     document.createElement("img");
+   image.className =
+     "product-image";
+   image.src =
+     safeImage(product.images[0]);
+   image.alt =
+     product.name;
+   image.onerror = function(){
+     this.onerror = null;
+     this.src =
+       "";
+   };
 
-  grid.innerHTML = "";
+   const info =
+     document.createElement("div");
+   info.className =
+     "product-info";
 
-  const filtered =
-    PRODUCTS.filter(product => {
+   const name =
+     document.createElement("div");
+   name.className =
+     "product-name";
+   name.textContent =
+     product.name;
 
-      const text =
-        (
-          product.name +
-          " " +
-          product.description
-        ).toLowerCase();
+   const price =
+     document.createElement("div");
+   price.className =
+     "price";
+   price.textContent =
+     formatPrice(product.price);
 
-      return text.includes(search);
+   const shipping =
+     document.createElement("div");
+   shipping.className =
+     "shipping";
+   shipping.textContent =
+     "exkl. frakt";
 
-    });
+   const sizes =
+     document.createElement("div");
+   sizes.className =
+     "sizes";
+   sizes.textContent =
+     "Storlekar: " +
+     product.sizes.join(", ");
 
-  document.getElementById("productCount").textContent =
-    `${filtered.length} / ${PRODUCTS.length}`;
-
-  document.getElementById("noResults").style.display =
-    filtered.length === 0 ? "block" : "none";
-
-
-  filtered.forEach((product,index)=>{
-
-    const card =
-      document.createElement("div");
-
-    card.className =
-      "product-card";
-
-    card.onclick = () =>
-      openProduct(product);
-
-
-    const image =
-      document.createElement("img");
-
-    image.className =
-      "product-image";
-
-    image.src =
-      safeImage(product.images[0]);
-
-    image.alt =
-      product.name;
-
-    image.onerror = function(){
-
-      this.onerror = null;
-
-      this.src =
-        "";
-
-    };
-
-
-    const info =
-      document.createElement("div");
-
-    info.className =
-      "product-info";
-
-
-    const name =
-      document.createElement("div");
-
-    name.className =
-      "product-name";
-
-    name.textContent =
-      product.name;
-
-
-    const price =
-      document.createElement("div");
-
-    price.className =
-      "price";
-
-    price.textContent =
-      formatPrice(product.price);
-
-
-    const shipping =
-      document.createElement("div");
-
-    shipping.className =
-      "shipping";
-
-    shipping.textContent =
-      "exkl. frakt";
-
-
-    const sizes =
-      document.createElement("div");
-
-    sizes.className =
-      "sizes";
-
-    sizes.textContent =
-      "Storlekar: " +
-      product.sizes.join(", ");
-
-
-    info.appendChild(name);
-    info.appendChild(price);
-    info.appendChild(shipping);
-    info.appendChild(sizes);
-
-    card.appendChild(image);
-    card.appendChild(info);
-
-    grid.appendChild(card);
-
-  });
-
+   info.appendChild(name);
+   info.appendChild(price);
+   info.appendChild(shipping);
+   info.appendChild(sizes);
+   card.appendChild(image);
+   card.appendChild(info);
+   grid.appendChild(card);
+ });
 }
-
 
 /*
 ========================================================
 OPEN PRODUCT
 ========================================================
 */
-
 function openProduct(product){
+ currentProduct =
+   product;
+ document.getElementById("modalName")
+   .textContent =
+   product.name;
+ document.getElementById("modalPrice")
+   .textContent =
+   formatPrice(product.price);
+ document.getElementById("modalDescription")
+   .textContent =
+   product.description;
 
-  currentProduct =
-    product;
+ document.getElementById("modalSizes")
+   .innerHTML =
+   product.sizes
+     .map(size =>
+       `<span class="size-pill">${escapeHTML(size)}</span>`
+     )
+     .join("");
 
-  document.getElementById("modalName")
-    .textContent =
-    product.name;
+ const mainImage =
+   document.getElementById("mainImage");
+ mainImage.src =
+   product.images[0];
+ mainImage.onerror = function(){
+   this.onerror = null;
+   this.src =
+     "";
+ };
 
-  document.getElementById("modalPrice")
-    .textContent =
-    formatPrice(product.price);
+ const thumbnails =
+   document.getElementById("thumbnails");
+ thumbnails.innerHTML = "";
 
-  document.getElementById("modalDescription")
-    .textContent =
-    product.description;
+ product.images.forEach((image,index)=>{
+   const thumb =
+     document.createElement("img");
+   thumb.className =
+     "thumbnail";
+   if(index === 0){
+     thumb.classList.add("active");
+   }
+   thumb.src =
+     image;
+   thumb.alt =
+     `${product.name} bild ${index+1}`;
+   thumb.onerror = function(){
+     this.onerror = null;
+     this.src =
+       "https://placehold.co/150x150?text=Bild";
+   };
 
+   thumb.onclick = function(e){
+     e.stopPropagation();
+     mainImage.src =
+       image;
+     document
+       .querySelectorAll(".thumbnail")
+       .forEach(t =>
+         t.classList.remove("active")
+       );
+     this.classList.add("active");
+   };
 
-  document.getElementById("modalSizes")
-    .innerHTML =
-    product.sizes
-      .map(size =>
-        `<span class="size-pill">${escapeHTML(size)}</span>`
-      )
-      .join("");
+   thumbnails.appendChild(thumb);
+ });
 
-
-  const mainImage =
-    document.getElementById("mainImage");
-
-  mainImage.src =
-    product.images[0];
-
-  mainImage.onerror = function(){
-
-    this.onerror = null;
-
-    this.src =
-      "https://placehold.co/900x900?text=Bild+saknas";
-
-  };
-
-
-  const thumbnails =
-    document.getElementById("thumbnails");
-
-  thumbnails.innerHTML = "";
-
-
-  product.images.forEach((image,index)=>{
-
-    const thumb =
-      document.createElement("img");
-
-    thumb.className =
-      "thumbnail";
-
-    if(index === 0){
-      thumb.classList.add("active");
-    }
-
-    thumb.src =
-      image;
-
-    thumb.alt =
-      `${product.name} bild ${index+1}`;
-
-    thumb.onerror = function(){
-
-      this.onerror = null;
-
-      this.src =
-        "";
-
-    };
-
-
-    thumb.onclick = function(e){
-
-      e.stopPropagation();
-
-      mainImage.src =
-        image;
-
-      document
-        .querySelectorAll(".thumbnail")
-        .forEach(t =>
-          t.classList.remove("active")
-        );
-
-      this.classList.add("active");
-
-    };
-
-
-    thumbnails.appendChild(thumb);
-
-  });
-
-
-  document.getElementById("productModal")
-    .classList.add("active");
-
-  document.body.style.overflow =
-    "hidden";
-
+ document.getElementById("productModal")
+   .classList.add("active");
+ document.body.style.overflow =
+   "hidden";
 }
-
 
 /*
 ========================================================
 CLOSE MODAL
 ========================================================
 */
-
 function closeModal(){
-
-  document.getElementById("productModal")
-    .classList.remove("active");
-
-  document.body.style.overflow =
-    "";
-
+ document.getElementById("productModal")
+   .classList.remove("active");
+ document.body.style.overflow =
+   "";
 }
-
 
 /*
 ========================================================
 COPY PRODUCT LINK
 ========================================================
 */
-
 async function copyProductLink(){
+ if(!currentProduct){
+   return;
+ }
 
-  if(!currentProduct){
-    return;
-  }
+ const link =
+currentProduct.link;
 
+ if(
+   !link ||
+   link === "DIN_PRODUKTLÄNK_HÄR"
+ ){
+   alert(
+     "Lägg in produktlänken först i produktens 'link'."
+   );
+   return;
+ }
 
-  const link =
-    currentProduct.link;
-
-
-  if(
-    !link ||
-    link === "DIN_PRODUKTLÄNK_HÄR"
-  ){
-
-    alert(
-      "Lägg in produktlänken först i produktens 'link'."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await navigator.clipboard.writeText(link);
-
-    const button =
-      document.getElementById("copyButton");
-
-    const original =
-      translations[currentLanguage].copy;
-
-    button.textContent =
-      translations[currentLanguage].copied;
-
-    setTimeout(()=>{
-
-      button.textContent =
-        original;
-
-    },1800);
-
-  }catch(error){
-
-    const temp =
-      document.createElement("textarea");
-
-    temp.value =
-      link;
-
-    document.body.appendChild(temp);
-
-    temp.select();
-
-    document.execCommand("copy");
-
-    temp.remove();
-
-    alert(
-      "Produktlänken har kopierats!"
-    );
-
-  }
-
+ try{
+   await navigator.clipboard.writeText(link);
+   const button =
+     document.getElementById("copyButton");
+   const original =
+     translations[currentLanguage].copy;
+   button.textContent =
+     translations[currentLanguage].copied;
+   setTimeout(()=>{
+     button.textContent =
+       original;
+   },1800);
+ }catch(error){
+   const temp =
+     document.createElement("textarea");
+   temp.value =
+     link;
+   document.body.appendChild(temp);
+   temp.select();
+   document.execCommand("copy");
+   temp.remove();
+   alert(
+     "Produktlänken har kopierats!"
+   );
+ }
 }
-
 
 /*
 ========================================================
 ESCAPE HTML
 ========================================================
 */
-
 function escapeHTML(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
+ return String(value)
+   .replaceAll("&","&amp;")
+   .replaceAll("<","&lt;")
+   .replaceAll(">","&gt;")
+   .replaceAll('"',"&quot;")
+   .replaceAll("'","&#039;");
 }
-
 
 /*
 ========================================================
 LANGUAGE
 ========================================================
 */
-
 function updateLanguage(){
+ const t =
+   translations[currentLanguage];
 
-  const t =
-    translations[currentLanguage];
+ document.getElementById("search")
+   .placeholder =
+   t.search;
 
+ document.getElementById("heroText")
+   .textContent =
+   t.hero;
 
-  document.getElementById("search")
-    .placeholder =
-    t.search;
+ document.getElementById("productsTitle")
+   .textContent =
+   t.products;
 
+ document.querySelector(".size-title")
+   .textContent =
+   t.sizes;
 
-  document.getElementById("heroText")
-    .textContent =
-    t.hero;
+ document.getElementById("copyButton")
+   .textContent =
+   t.copy;
 
+ document.getElementById("goatedButton")
+   .textContent =
+   t.goated;
 
-  document.getElementById("productsTitle")
-    .textContent =
-    t.products;
+ document.querySelector(".no-results h3")
+   .textContent =
+   t.noResults;
 
-
-  document.querySelector(".size-title")
-    .textContent =
-    t.sizes;
-
-
-  document.getElementById("copyButton")
-    .textContent =
-    t.copy;
-
-
-  document.getElementById("goatedButton")
-    .textContent =
-    t.goated;
-
-
-  document.querySelector(".no-results h3")
-    .textContent =
-    t.noResults;
-
-
-  renderProducts();
-
+ renderProducts();
 }
-
 
 /*
 ========================================================
 SEARCH
 ========================================================
 */
-
 document
-  .getElementById("search")
-  .addEventListener(
-    "input",
-    renderProducts
-  );
-
+ .getElementById("search")
+ .addEventListener(
+   "input",
+   renderProducts
+ );
 
 /*
 ========================================================
 CURRENCY
 ========================================================
 */
-
 document
-  .getElementById("currency")
-  .addEventListener(
-    "change",
-    function(){
-
-      currentCurrency =
-        this.value;
-
-      renderProducts();
-
-      if(currentProduct){
-
-        document.getElementById("modalPrice")
-          .textContent =
-          formatPrice(
-            currentProduct.price
-          );
-
-      }
-
-    }
-  );
-
+ .getElementById("currency")
+ .addEventListener(
+   "change",
+   function(){
+     currentCurrency =
+       this.value;
+     renderProducts();
+     if(currentProduct){
+       document.getElementById("modalPrice")
+         .textContent =
+         formatPrice(
+           currentProduct.price
+         );
+     }
+   }
+ );
 
 /*
 ========================================================
 LANGUAGE CHANGE
 ========================================================
 */
-
 document
-  .getElementById("language")
-  .addEventListener(
-    "change",
-    function(){
-
-      currentLanguage =
-        this.value;
-
-      updateLanguage();
-
-    }
-  );
-
+ .getElementById("language")
+ .addEventListener(
+   "change",
+   function(){
+     currentLanguage =
+       this.value;
+     updateLanguage();
+   }
+ );
 
 /*
 ========================================================
 CLICK OUTSIDE MODAL
 ========================================================
 */
-
 document
-  .getElementById("productModal")
-  .addEventListener(
-    "click",
-    function(e){
-
-      if(
-        e.target === this
-      ){
-
-        closeModal();
-
-      }
-
-    }
-  );
-
+ .getElementById("productModal")
+ .addEventListener(
+   "click",
+   function(e){
+     if(
+       e.target === this
+     ){
+       closeModal();
+     }
+   }
+ );
 
 /*
 ========================================================
 ESC KEY
 ========================================================
 */
-
 document
-  .addEventListener(
-    "keydown",
-    function(e){
-
-      if(e.key === "Escape"){
-
-        closeModal();
-
-        closeWelcome();
-
-      }
-
-    }
-  );
-
+ .addEventListener(
+   "keydown",
+   function(e){
+     if(e.key === "Escape"){
+       closeModal();
+       closeWelcome();
+     }
+   }
+ );
 
 /*
 ========================================================
 WELCOME POPUP
 ========================================================
 */
-
 function closeWelcome(){
-
-  const overlay =
-    document.getElementById(
-      "welcomeOverlay"
-    );
-
-  overlay.style.display =
-    "none";
-
-  localStorage.setItem(
-    "alexfynds_welcome_seen",
-    "1"
-  );
-
+ const overlay =
+   document.getElementById(
+     "welcomeOverlay"
+   );
+ overlay.style.display =
+   "none";
+ localStorage.setItem(
+   "alexfynds_welcome_seen",
+   "1"
+ );
 }
-
 
 /*
 ========================================================
 SHOW POPUP ONLY FIRST TIME
 ========================================================
 */
-
 if(
-  localStorage.getItem(
-    "alexfynds_welcome_seen"
-  ) === "1"
+ localStorage.getItem(
+   "alexfynds_welcome_seen"
+ ) === "1"
 ){
-
-  document.getElementById(
-    "welcomeOverlay"
-  ).style.display =
-    "none";
-
+ document.getElementById(
+   "welcomeOverlay"
+ ).style.display =
+   "none";
 }
-
 
 /*
 ========================================================
 INITIAL RENDER
 ========================================================
 */
-
 renderProducts();
-
 </script>
-
 </body>
 </html>
