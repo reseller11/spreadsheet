@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d12">
+<meta name="description" content="AlexFynds – upptäck produkter, jämför fynd och gå direkt till produktlänken.">
+<title>AlexFynds — Fynd du faktiskt vill ha</title>
+
+<style>
+/* =========================================================
+   ALEXFYNDS PRO — EN FIL
+   Du behöver bara ändra PRODUCTS längst ner.
+   Bilder läggs i mappen /images/
+   ========================================================= */
+
+:root{
+  --bg:#f5f7fa;
+  --surface:#ffffff;
+  --surface-2:#f8f9fb;
+  --text:#0d1117;
+  --muted:#667085;
+  --line:#e7eaf0;
+  --dark:#0b0d12;
+  --dark-2:#151922;
+  --accent:#dfff38;
+  --accent-2:#bfe900;
+  --success:#1f9d67;
+  --shadow-sm:0 3px 15px rgba(16,24,40,.05);
+  --shadow:0 15px 45px rgba(16,24,40,.09);
+  --shadow-lg:0 30px 90px rgba(16,24,40,.18);
+  --radius:22px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body.modal-open{overflow:hidden}
+
+button,input,select{font:inherit}
+
+button{cursor:pointer}
+
+a{color:inherit;text-decoration:none}
+
+::selection{
+  background:var(--accent);
+  color:#000;
+}
+
+/* ---------- BACKGROUND ---------- */
+
+.page-glow{
+  position:fixed;
+  inset:auto -180px -220px auto;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  background:rgba(223,255,56,.13);
+  filter:blur(70px);
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* ---------- HEADER ---------- */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(220,224,232,.8);
+}
+
+.header-inner{
+  width:min(1440px,100%);
+  margin:auto;
+  min-height:76px;
+  padding:12px 24px;
+  display:grid;
+  grid-template-columns:auto minmax(260px,1fr) auto;
+  align-items:center;
+  gap:24px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:950;
+  letter-spacing:-.7px;
+  white-space:nowrap;
+}
+
+.logo-box{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:var(--dark);
+  color:#fff;
+  font-size:13px;
+  font-weight:950;
+  box-shadow:0 8px 22px rgba(0,0,0,.14);
+}
+
+.logo-name{font-size:20px}
+
+.search-wrap{
+  width:min(680px,100%);
+  justify-self:center;
+  position:relative;
+}
+
+.search-icon{
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#7b8494;
+  pointer-events:none;
+}
+
+.search{
+  width:100%;
+  height:46px;
+  border:1px solid var(--line);
+  background:#f6f7f9;
+  border-radius:14px;
+  outline:none;
+  padding:0 44px 0 44px;
+  color:var(--text);
+  transition:.2s ease;
+}
+
+.search:focus{
+  background:#fff;
+  border-color:#c9ced8;
+  box-shadow:0 0 0 4px rgba(223,255,56,.18);
+}
+
+.search-clear{
+  position:absolute;
+  right:9px;
+  top:7px;
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:10px;
+  background:#e9ecf1;
+  color:#596273;
+  display:none;
+}
+
+.search-clear.visible{display:block}
+
+.controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.select{
+  height:42px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  padding:0 12px;
+  border-radius:12px;
+  outline:none;
+  font-size:13px;
+  font-weight:700;
+}
+
+.select:focus{
+  border-color:#c8ced8;
+  box-shadow:0 0 0 4px rgba(223,255,56,.15);
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+  width:min(1440px,100%);
+  margin:auto;
+  padding:30px 24px 16px;
+}
+
+.hero-box{
+  min-height:350px;
+  border-radius:30px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(223,255,56,.28),transparent 25%),
+    radial-gradient(circle at 75% 90%,rgba(255,255,255,.08),transparent 30%),
+    linear-gradient(135deg,#090b10,#171b24);
+  color:#fff;
+  box-shadow:var(--shadow-lg);
+  isolation:isolate;
+}
+
+.hero-box::before{
+  content:"";
+  position:absolute;
+  width:430px;
+  height:430px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:50%;
+  right:-120px;
+  top:-180px;
+}
+
+.hero-box::after{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  right:100px;
+  bottom:-180px;
+  background:rgba(223,255,56,.12);
+  filter:blur(35px);
+}
+
+.hero-grid{
+  position:relative;
+  z-index:2;
+  min-height:350px;
+  padding:52px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 350px;
+  gap:40px;
+  align-items:center;
+}
+
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 11px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  color:#d9dee8;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+
+.kicker-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 14px rgba(223,255,56,.8);
+}
+
+.hero h1{
+  max-width:800px;
+  font-size:clamp(42px,6vw,78px);
+  line-height:.94;
+  letter-spacing:-4px;
+  margin-bottom:20px;
+}
+
+.hero h1 span{
+  color:var(--accent);
+}
+
+.hero p{
+  max-width:650px;
+  color:#b9c0cc;
+  font-size:16px;
+  line-height:1.7;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:27px;
+}
+
+.hero-btn{
+  border:0;
+  border-radius:13px;
+  padding:13px 17px;
+  font-weight:900;
+  transition:.2s ease;
+}
+
+.hero-btn.primary{
+  background:var(--accent);
+  color:#10130a;
+}
+
+.hero-btn.secondary{
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.hero-btn:hover{
+  transform:translateY(-2px);
+}
+
+.hero-stats{
+  display:grid;
+  gap:10px;
+}
+
+.stat{
+  padding:17px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.055);
+  border-radius:18px;
+  backdrop-filter:blur(10px);
+}
+
+.stat strong{
+  display:block;
+  font-size:26px;
+  letter-spacing:-1px;
+  margin-bottom:3px;
+}
+
+.stat span{
+  color:#9da6b5;
+  font-size:12px;
+}
+
+/* ---------- TOOLBAR ---------- */
+
+.products-section{
+  width:min(1440px,100%);
+  margin:auto;
+  padding:22px 24px 80px;
+}
+
+.section-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin:15px 0 18px;
+}
+
+.section-title-wrap h2{
+  font-size:28px;
+  letter-spacing:-1px;
+  margin-bottom:5px;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.product-count{
+  color:#727b8b;
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+  padding:10px;
+  background:rgba(255,255,255,.72);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow-sm);
+}
+
+.filter-note{
+  padding:0 7px;
+  color:#7a8392;
+  font-size:12px;
+  font-weight:700;
+}
+
+.sort-select{
+  height:38px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:0 10px;
+  outline:none;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* ---------- PRODUCT GRID ---------- */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:20px;
+}
+
+.product-card{
+  min-width:0;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:21px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  box-shadow:var(--shadow-sm);
+  transition:
+    transform .24s ease,
+    box-shadow .24s ease,
+    border-color .24s ease;
+  animation:cardIn .45s ease both;
+}
+
+.product-card:hover{
+  transform:translateY(-7px);
+  border-color:#d8dde6;
+  box-shadow:0 24px 55px rgba(16,24,40,.13);
+}
+
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.product-image-wrap{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 35%,#fff,#eef1f5);
+}
+
+.product-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .45s cubic-bezier(.2,.7,.2,1);
+}
+
+.product-card:hover .product-image{
+  transform:scale(1.055);
+}
+
+.product-image-placeholder{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:7px;
+  color:#9099a8;
+  font-size:12px;
+  font-weight:800;
+}
+
+.product-image-placeholder::before{
+  content:"◫";
+  font-size:30px;
+  color:#b5bcc8;
+}
+
+.product-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(11,13,18,.9);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.4px;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
+
+.product-number{
+  position:absolute;
+  top:12px;
+  right:12px;
+  padding:7px 9px;
+  border-radius:9px;
+  background:rgba(255,255,255,.9);
+  color:#697386;
+  font-size:10px;
+  font-weight:900;
+  backdrop-filter:blur(8px);
+}
+
+.product-info{
+  padding:17px 17px 18px;
+}
+
+.product-name{
+  font-size:15px;
+  line-height:1.35;
+  font-weight:850;
+  letter-spacing:-.15px;
+  min-height:41px;
+  margin-bottom:10px;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.price-row{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.price{
+  font-size:21px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.6px;
+}
+
+.price-currency{
+  color:#8a93a2;
+  font-size:10px;
+  font-weight:800;
+}
+
+.shipping{
+  color:var(--success);
+  font-size:11px;
+  font-weight:800;
+  margin-top:7px;
+}
+
+.card-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:13px;
+  padding-top:12px;
+  border-top:1px solid #eef0f4;
+}
+
+.sizes{
+  min-width:0;
+  color:#6c7585;
+  font-size:11px;
+  line-height:1.4;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.view-product{
+  flex:0 0 auto;
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:#f0f2f5;
+  color:#202631;
+  font-size:15px;
+  transition:.2s ease;
+}
+
+.product-card:hover .view-product{
+  background:var(--dark);
+  color:#fff;
+}
+
+/* ---------- NO RESULTS ---------- */
+
+.no-results{
+  display:none;
+  text-align:center;
+  padding:80px 20px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+}
+
+.no-results-icon{
+  font-size:35px;
+  margin-bottom:12px;
+}
+
+.no-results h3{
+  font-size:22px;
+  margin-bottom:7px;
+}
+
+.no-results p{
+  color:var(--muted);
+}
+
+/* ---------- MODAL ---------- */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(5,7,10,.72);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+.modal.active{
+  display:flex;
+  animation:fadeIn .2s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.modal-box{
+  width:min(1120px,100%);
+  max-height:calc(100vh - 36px);
+  overflow:auto;
+  background:#fff;
+  border-radius:27px;
+  display:grid;
+  grid-template-columns:1.03fr .97fr;
+  box-shadow:0 40px 120px rgba(0,0,0,.3);
+  animation:modalIn .28s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(20px) scale(.98)}
+  to{opacity:1;transform:none}
+}
+
+.close{
+  position:absolute;
+  top:30px;
+  right:30px;
+  z-index:10;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:50%;
+  background:rgba(0,0,0,.72);
+  color:#fff;
+  font-size:22px;
+  line-height:1;
+}
+
+.gallery{
+  padding:22px;
+  background:#f1f3f6;
+}
+
+.main-image{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  display:block;
+  background:#fff;
+  border-radius:20px;
+}
+
+.thumbnails{
+  display:flex;
+  gap:9px;
+  margin-top:10px;
+  overflow-x:auto;
+  padding-bottom:3px;
+}
+
+.thumbnail{
+  flex:0 0 68px;
+  width:68px;
+  height:68px;
+  object-fit:cover;
+  border-radius:11px;
+  border:2px solid transparent;
+  background:#fff;
+  cursor:pointer;
+}
+
+.thumbnail.active{
+  border-color:#111;
+}
+
+.details{
+  padding:48px 34px 32px;
+  display:flex;
+  flex-direction:column;
+}
+
+.detail-eyebrow{
+  color:#7b8493;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
+
+.details h2{
+  font-size:34px;
+  line-height:1.08;
+  letter-spacing:-1.4px;
+  padding-right:35px;
+  margin-bottom:13px;
+}
+
+.details-price{
+  font-size:30px;
+  font-weight:950;
+  letter-spacing:-1px;
+}
+
+.details-shipping{
+  color:var(--success);
+  font-size:12px;
+  font-weight:800;
+  margin-top:6px;
+  margin-bottom:24px;
+}
+
+.description{
+  color:#596273;
+  line-height:1.7;
+  font-size:14px;
+  margin-bottom:25px;
+}
+
+.size-title{
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  margin-bottom:9px;
+}
+
+.size-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:25px;
+}
+
+.size-pill{
+  border:1px solid #dfe3e9;
+  background:#fafbfc;
+  padding:8px 11px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.action{
+  width:100%;
+  min-height:48px;
+  border:0;
+  border-radius:13px;
+  font-weight:900;
+  transition:.2s ease;
+}
+
+.action:hover{
+  transform:translateY(-2px);
+}
+
+.copy-btn{
+  background:#11141a;
+  color:#fff;
+}
+
+.goated-btn{
+  background:var(--accent);
+  color:#10130a;
+  margin-top:9px;
+}
+
+.note{
+  color:#9299a6;
+  font-size:10px;
+  text-align:center;
+  margin-top:10px;
+  line-height:1.5;
+}
+
+/* ---------- WELCOME POPUP ---------- */
+
+.welcome-overlay{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(5,7,10,.78);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.welcome{
+  width:min(540px,100%);
+  background:#fff;
+  border-radius:27px;
+  padding:34px;
+  position:relative;
+  box-shadow:0 40px 120px rgba(0,0,0,.32);
+  animation:modalIn .3s cubic-bezier(.2,.8,.2,1);
+}
+
+.welcome-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:50%;
+  background:#eef0f3;
+  color:#4c5564;
+  font-size:20px;
+}
+
+.welcome-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:23px;
+  font-weight:950;
+}
+
+.welcome h2{
+  max-width:400px;
+  font-size:32px;
+  line-height:1.02;
+  letter-spacing:-1.3px;
+  margin-bottom:10px;
+}
+
+.welcome-sub{
+  color:#697386;
+  line-height:1.6;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+.discount{
+  background:
+    radial-gradient(circle at 85% 10%,rgba(223,255,56,.18),transparent 28%),
+    #101319;
+  color:#fff;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:15px;
+}
+
+.discount strong{
+  display:block;
+  font-size:28px;
+  letter-spacing:-1px;
+  margin-bottom:3px;
+}
+
+.discount span{
+  color:#aeb6c3;
+  font-size:12px;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.feature{
+  background:#f5f6f8;
+  border:1px solid #eceef2;
+  border-radius:13px;
+  padding:12px 8px;
+  text-align:center;
+  font-size:11px;
+  font-weight:850;
+  line-height:1.35;
+}
+
+.feature-icon{
+  font-size:18px;
+  display:block;
+  margin-bottom:4px;
+}
+
+.welcome-btn{
+  width:100%;
+  min-height:48px;
+  border:0;
+  border-radius:13px;
+  padding:12px;
+  font-weight:950;
+  transition:.2s ease;
+}
+
+.welcome-btn:hover{transform:translateY(-2px)}
+
+.login{background:var(--accent)}
+
+.browse{
+  background:#11141a;
+  color:#fff;
+  margin-top:8px;
+}
+
+.disclaimer{
+  text-align:center;
+  color:#9aa1ad;
+  font-size:9px;
+  margin-top:12px;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+  background:#0b0d12;
+  color:#fff;
+  padding:55px 24px;
+  position:relative;
+  overflow:hidden;
+}
+
+footer::before{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:rgba(223,255,56,.08);
+  right:-100px;
+  top:-180px;
+  filter:blur(35px);
+}
+
+.footer-inner{
+  width:min(1440px,100%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+  position:relative;
+}
+
+.footer-logo{
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:-.7px;
+  margin-bottom:7px;
+}
+
+.footer-text{
+  color:#8e96a4;
+  font-size:12px;
+}
+
+.socials{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.social{
+  border:1px solid #292e38;
+  padding:10px 13px;
+  border-radius:10px;
+  color:#cbd0d9;
+  font-size:12px;
+  font-weight:800;
+  transition:.2s ease;
+}
+
+.social:hover{
+  background:#fff;
+  color:#111;
+  border-color:#fff;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:1100px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-grid{grid-template-columns:1fr 280px}
+}
+
+@media(max-width:820px){
+  .header-inner{
+    grid-template-columns:auto auto;
+  }
+
+  .search-wrap{
+    grid-column:1/-1;
+    grid-row:2;
+    width:100%;
+  }
+
+  .controls{
+    justify-self:end;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+    padding:38px 30px;
+  }
+
+  .hero-box,.hero-grid{min-height:unset}
+
+  .hero-stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .modal-box{
+    grid-template-columns:1fr;
+  }
+
+  .gallery{
+    padding:14px;
+  }
+
+  .details{
+    padding:25px 20px 22px;
+  }
+}
+
+@media(max-width:620px){
+  .header-inner,
+  .hero,
+  .products-section{
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  .header-inner{
+    gap:10px;
+  }
+
+  .logo-name{font-size:17px}
+
+  .logo-box{
+    width:38px;
+    height:38px;
+  }
+
+  .controls{
+    gap:5px;
+  }
+
+  .select{
+    height:38px;
+    padding:0 7px;
+    font-size:11px;
+  }
+
+  .hero-box{
+    border-radius:23px;
+  }
+
+  .hero-grid{
+    padding:32px 22px;
+  }
+
+  .hero h1{
+    font-size:46px;
+    letter-spacing:-2.5px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .hero-stats{
+    grid-template-columns:1fr;
+  }
+
+  .section-top{
+    align-items:start;
+    flex-direction:column;
+    gap:7px;
+  }
+
+  .toolbar{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .sort-select{
+    width:100%;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .product-info{
+    padding:13px;
+  }
+
+  .product-name{
+    font-size:13px;
+    min-height:36px;
+  }
+
+  .price{
+    font-size:18px;
+  }
+
+  .shipping{
+    font-size:10px;
+  }
+
+  .sizes{
+    font-size:10px;
+  }
+
+  .view-product{
+    width:28px;
+    height:28px;
+  }
+
+  .modal{
+    padding:8px;
+  }
+
+  .modal-box{
+    max-height:calc(100vh - 16px);
+    border-radius:21px;
+  }
+
+  .close{
+    top:17px;
+    right:17px;
+  }
+
+  .details h2{
+    font-size:27px;
+  }
+
+  .details-price{
+    font-size:25px;
+  }
+
+  .welcome{
+    padding:26px 20px;
+    border-radius:22px;
+  }
+
+  .welcome h2{
+    font-size:27px;
+  }
+
+  .features{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  footer{
+    padding:40px 18px;
+  }
+}
+
+@media(max-width:390px){
+  .grid{gap:8px}
+  .product-info{padding:11px}
+  .product-badge{top:8px;left:8px}
+  .product-number{top:8px;right:8px}
+  .product-name{font-size:12px}
+  .price{font-size:16px}
+  .card-bottom{margin-top:9px;padding-top:9px}
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page-glow"></div>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="header-inner">
+
+    <a href="#" class="logo" aria-label="AlexFynds startsida">
+      <span class="logo-box">AF</span>
+      <span class="logo-name">AlexFynds</span>
+    </a>
+
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="search" class="search" type="search"
+             placeholder="Sök bland 200 produkter..."
+             autocomplete="off">
+      <button id="searchClear" class="search-clear" type="button">×</button>
+    </div>
+
+    <div class="controls">
+      <select id="language" class="select" aria-label="Språk">
+        <option value="sv">🇸🇪 Svenska</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="ko">🇰🇷 한국어</option>
+      </select>
+
+      <select id="currency" class="select" aria-label="Valuta">
+        <option value="SEK">SEK</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+        <option value="GBP">GBP</option>
+        <option value="CNY">CNY</option>
+        <option value="JPY">JPY</option>
+        <option value="CHF">CHF</option>
+        <option value="NOK">NOK</option>
+        <option value="DKK">DKK</option>
+        <option value="PLN">PLN</option>
+      </select>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-box">
+    <div class="hero-grid">
+
+      <div>
+        <div class="hero-kicker">
+          <span class="kicker-dot"></span>
+          AlexFynds • Utvalda fynd
+        </div>
+
+        <h1>Hitta ditt nästa <span>fynd.</span></h1>
+
+        <p id="heroText">
+          Upptäck produkter, jämför priser och gå direkt till produktlänken.
+          En enkel och modern plats för dina favoritfynd.
+        </p>
+
+        <div class="hero-actions">
+          <button class="hero-btn primary" onclick="scrollToProducts()">
+            Utforska produkter ↓
+          </button>
+          <button class="hero-btn secondary" onclick="focusSearch()">
+            Sök efter något
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <strong id="heroProductNumber">200</strong>
+          <span>Produkter samlade</span>
+        </div>
+        <div class="stat">
+          <strong>10+</strong>
+          <span>Valutor & språk</span>
+        </div>
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>Bläddra bland fynden</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<section id="productsSection" class="products-section">
+
+  <div class="section-top">
+    <div class="section-title-wrap">
+      <h2 id="productsTitle">Alla fynd</h2>
+      <p class="section-subtitle" id="sectionSubtitle">
+        Titel, pris och viktig information syns direkt.
+      </p>
+    </div>
+    <span id="productCount" class="product-count"></span>
+  </div>
+
+  <div class="toolbar">
+    <div class="filter-note" id="filterNote">Visar alla produkter</div>
+    <select id="sort" class="sort-select" aria-label="Sortera produkter">
+      <option value="default">Sortering: Standard</option>
+      <option value="price-low">Pris: lägst först</option>
+      <option value="price-high">Pris: högst först</option>
+      <option value="name">Namn: A–Ö</option>
+    </select>
+  </div>
+
+  <div id="productsGrid" class="grid"></div>
+
+  <div id="noResults" class="no-results">
+    <div class="no-results-icon">⌕</div>
+    <h3>Inga produkter hittades</h3>
+    <p>Testa ett annat sökord.</p>
+  </div>
+
+</section>
+
+<!-- ================= PRODUCT MODAL ================= -->
+<div id="productModal" class="modal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalName">
+
+    <button class="close" onclick="closeModal()" aria-label="Stäng">×</button>
+
+    <div class="gallery">
+      <img id="mainImage" class="main-image" src="" alt="Produktbild">
+      <div id="thumbnails" class="thumbnails"></div>
+    </div>
+
+    <div class="details">
+      <div class="detail-eyebrow">AlexFynds produkt</div>
+      <h2 id="modalName"></h2>
+      <div id="modalPrice" class="details-price"></div>
+
+      <div class="details-shipping">
+        ✓ Pris visas i vald valuta • exkl. frakt
+      </div>
+
+      <div id="modalDescription" class="description"></div>
+
+      <div class="size-title" id="sizeTitle">Tillgängliga storlekar</div>
+      <div id="modalSizes" class="size-list"></div>
+
+      <button id="copyButton" class="action copy-btn" onclick="copyProductLink()">
+        Kopiera produktlänk
+      </button>
+
+      <a id="goatedButton"
+         class="action goated-btn"
+         href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
+         target="_blank"
+         rel="noopener noreferrer">
+        Gå till GoatedBuy
+      </a>
+
+      <div class="note">
+        Produktlänken kopieras så att du enkelt kan använda den vidare.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= WELCOME ================= -->
+<div id="welcomeOverlay" class="welcome-overlay">
+  <div class="welcome">
+
+    <button class="welcome-close" onclick="closeWelcome()" aria-label="Stäng">×</button>
+
+    <div class="welcome-logo">
+      <span class="logo-box">AF</span>
+      <span>AlexFynds</span>
+    </div>
+
+    <h2>Välkommen till AlexFynds 👋</h2>
+
+    <p class="welcome-sub">
+      Upptäck produkter och fynd på ett ställe. Sök, jämför och öppna
+      produktinformationen när du hittat något du gillar.
+    </p>
+
+    <div class="discount">
+      <strong>15% rabatt</strong>
+      <span>på ditt första köp hos GoatedBuy</span>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">⌕</span>
+        Produktfynd
+      </div>
+      <div class="feature">
+        <span class="feature-icon">◈</span>
+        Flera val
+      </div>
+      <div class="feature">
+        <span class="feature-icon">↗</span>
+        Produktlänkar
+      </div>
+    </div>
+
+    <a class="welcome-btn login"
+       href="https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds"
+       target="_blank"
+       rel="noopener noreferrer">
+      Logga in på GoatedBuy
+    </a>
+
+    <button class="welcome-btn browse" onclick="closeWelcome()">
+      Bläddra bland fynden
+    </button>
+
+    <div class="disclaimer">
+      Rabatt gäller enligt aktuella villkor hos GoatedBuy
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+
+    <div>
+      <div class="footer-logo">AlexFynds</div>
+      <div class="footer-text">Fynd. Produkter. Länkar.</div>
+    </div>
+
+    <div class="socials">
+      <a class="social"
+         href="https://www.tiktok.com/@alexfynds"
+         target="_blank"
+         rel="noopener noreferrer">TikTok</a>
+
+      <a class="social"
+         href="https://www.instagram.com/alexfynds?igsi=c2dmMDg2YWplcXox&utm_source=qr"
+         target="_blank"
+         rel="noopener noreferrer">Instagram</a>
+
+      <a class="social"
+         href="DIN_DISCORD_LÄNK"
+         target="_blank"
+         rel="noopener noreferrer">Discord</a>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   ALEXFYNDS — PRODUKTER
+   =========================================================
+   ÄNDRA PRODUKTERNA HÄR.
+
+   Exempel:
+   name: "Nike Hoodie",
+   price: 799,
+   description: "Din beskrivning...",
+   sizes: ["S","M","L","XL"],
+   images: [
+     "images/produkt01.jpg",
+     "images/produkt01-2.jpg"
+   ],
+   link: "DIN_PRODUKTLÄNK_HÄR"
+
+   Alla priser i PRODUCTS anges i SEK.
+   ========================================================= */
+
+const GOATEDBUY_URL =
+  "https://m.goatedbuy.com/#/pages/account/register?invite-code=Alexfynds";
+
+/* ---------- PRODUKT 01–10 ---------- */
+
+const PRODUCTS = [
+  {
+    name:"Produkt 01",
+    price:299,
+    description:"Beskrivning för Produkt 01. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt01.jpg",
+      "images/produkt01-2.jpg",
+      "images/produkt01-3.jpg",
+      "images/produkt01-4.jpg",
+      "images/produkt01-5.jpg",
+      "images/produkt01-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 02",
+    price:299,
+    description:"Beskrivning för Produkt 02. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt02.jpg",
+      "images/produkt02-2.jpg",
+      "images/produkt02-3.jpg",
+      "images/produkt02-4.jpg",
+      "images/produkt02-5.jpg",
+      "images/produkt02-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 03",
+    price:299,
+    description:"Beskrivning för Produkt 03. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt03.jpg",
+      "images/produkt03-2.jpg",
+      "images/produkt03-3.jpg",
+      "images/produkt03-4.jpg",
+      "images/produkt03-5.jpg",
+      "images/produkt03-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 04",
+    price:299,
+    description:"Beskrivning för Produkt 04. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt04.jpg",
+      "images/produkt04-2.jpg",
+      "images/produkt04-3.jpg",
+      "images/produkt04-4.jpg",
+      "images/produkt04-5.jpg",
+      "images/produkt04-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 05",
+    price:299,
+    description:"Beskrivning för Produkt 05. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt05.jpg",
+      "images/produkt05-2.jpg",
+      "images/produkt05-3.jpg",
+      "images/produkt05-4.jpg",
+      "images/produkt05-5.jpg",
+      "images/produkt05-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 06",
+    price:299,
+    description:"Beskrivning för Produkt 06. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt06.jpg",
+      "images/produkt06-2.jpg",
+      "images/produkt06-3.jpg",
+      "images/produkt06-4.jpg",
+      "images/produkt06-5.jpg",
+      "images/produkt06-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 07",
+    price:299,
+    description:"Beskrivning för Produkt 07. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt07.jpg",
+      "images/produkt07-2.jpg",
+      "images/produkt07-3.jpg",
+      "images/produkt07-4.jpg",
+      "images/produkt07-5.jpg",
+      "images/produkt07-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 08",
+    price:299,
+    description:"Beskrivning för Produkt 08. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt08.jpg",
+      "images/produkt08-2.jpg",
+      "images/produkt08-3.jpg",
+      "images/produkt08-4.jpg",
+      "images/produkt08-5.jpg",
+      "images/produkt08-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 09",
+    price:299,
+    description:"Beskrivning för Produkt 09. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt09.jpg",
+      "images/produkt09-2.jpg",
+      "images/produkt09-3.jpg",
+      "images/produkt09-4.jpg",
+      "images/produkt09-5.jpg",
+      "images/produkt09-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  },
+  {
+    name:"Produkt 10",
+    price:299,
+    description:"Beskrivning för Produkt 10. Byt ut denna text mot information om produkten.",
+    sizes:["S","M","L","XL"],
+    images:[
+      "images/produkt10.jpg",
+      "images/produkt10-2.jpg",
+      "images/produkt10-3.jpg",
+      "images/produkt10-4.jpg",
+      "images/produkt10-5.jpg",
+      "images/produkt10-6.jpg"
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  }
+];
+
+/* ---------- PRODUKT 11–200 ---------- */
+
+for(let i=11;i<=200;i++){
+  const number = String(i).padStart(2,"0");
+
+  PRODUCTS.push({
+    name:`Produkt ${number}`,
+    price:299,
+    description:`Beskrivning för Produkt ${number}. Byt ut denna text mot information om produkten.`,
+    sizes:["S","M","L","XL"],
+    images:[
+      `images/produkt${number}.jpg`,
+      `images/produkt${number}-2.jpg`,
+      `images/produkt${number}-3.jpg`,
+      `images/produkt${number}-4.jpg`,
+      `images/produkt${number}-5.jpg`,
+      `images/produkt${number}-6.jpg`
+    ],
+    link:"DIN_PRODUKTLÄNK_HÄR"
+  });
+}
+
+/* =========================================================
+   SPRÅK
+   ========================================================= */
+
+const translations = {
+  sv:{
+    search:"Sök bland 200 produkter...",
+    hero:"Upptäck produkter, jämför priser och gå direkt till produktlänken. En enkel och modern plats för dina favoritfynd.",
+    products:"Alla fynd",
+    subtitle:"Titel, pris och viktig information syns direkt.",
+    all:"Visar alla produkter",
+    searchResults:"Visar resultat för",
+    noResults:"Inga produkter hittades",
+    copy:"Kopiera produktlänk",
+    copied:"Länk kopierad!",
+    goated:"Gå till GoatedBuy",
+    sizes:"Tillgängliga storlekar"
+  },
+  en:{
+    search:"Search 200 products...",
+    hero:"Discover products, compare prices and go directly to the product link. A simple and modern place for your favorite finds.",
+    products:"All finds",
+    subtitle:"Title, price and key information are visible instantly.",
+    all:"Showing all products",
+    searchResults:"Showing results for",
+    noResults:"No products found",
+    copy:"Copy product link",
+    copied:"Link copied!",
+    goated:"Go to GoatedBuy",
+    sizes:"Available sizes"
+  },
+  zh:{
+    search:"搜索 200 件商品...",
+    hero:"发现商品、比较价格并直接进入商品链接。",
+    products:"所有商品",
+    subtitle:"标题、价格和重要信息直接显示。",
+    all:"显示所有商品",
+    searchResults:"搜索结果",
+    noResults:"没有找到产品",
+    copy:"复制产品链接",
+    copied:"链接已复制！",
+    goated:"前往 GoatedBuy",
+    sizes:"可用尺码"
+  },
+  es:{
+    search:"Buscar entre 200 productos...",
+    hero:"Descubre productos, compara precios y accede directamente al enlace.",
+    products:"Todos los productos",
+    subtitle:"Título, precio e información importante visibles al instante.",
+    all:"Mostrando todos los productos",
+    searchResults:"Resultados para",
+    noResults:"No se encontraron productos",
+    copy:"Copiar enlace",
+    copied:"¡Enlace copiado!",
+    goated:"Ir a GoatedBuy",
+    sizes:"Tallas disponibles"
+  },
+  de:{
+    search:"200 Produkte durchsuchen...",
+    hero:"Produkte entdecken, Preise vergleichen und direkt zum Produktlink gehen.",
+    products:"Alle Angebote",
+    subtitle:"Titel, Preis und wichtige Informationen sofort sichtbar.",
+    all:"Alle Produkte werden angezeigt",
+    searchResults:"Ergebnisse für",
+    noResults:"Keine Produkte gefunden",
+    copy:"Produktlink kopieren",
+    copied:"Link kopiert!",
+    goated:"Zu GoatedBuy",
+    sizes:"Verfügbare Größen"
+  },
+  fr:{
+    search:"Rechercher parmi 200 produits...",
+    hero:"Découvrez des produits, comparez les prix et accédez directement au lien.",
+    products:"Toutes les trouvailles",
+    subtitle:"Titre, prix et informations importantes visibles immédiatement.",
+    all:"Tous les produits",
+    searchResults:"Résultats pour",
+    noResults:"Aucun produit trouvé",
+    copy:"Copier le lien",
+    copied:"Lien copié !",
+    goated:"Aller à GoatedBuy",
+    sizes:"Tailles disponibles"
+  },
+  ja:{
+    search:"200商品を検索...",
+    hero:"商品を見つけ、価格を比較し、商品リンクへ直接アクセスできます。",
+    products:"すべての商品",
+    subtitle:"タイトル、価格、重要な情報をすぐに確認できます。",
+    all:"すべての商品を表示",
+    searchResults:"検索結果",
+    noResults:"商品が見つかりません",
+    copy:"商品リンクをコピー",
+    copied:"リンクをコピーしました！",
+    goated:"GoatedBuyへ",
+    sizes:"利用可能なサイズ"
+  },
+  ko:{
+    search:"200개 제품 검색...",
+    hero:"제품을 찾고 가격을 비교한 뒤 제품 링크로 바로 이동하세요.",
+    products:"모든 상품",
+    subtitle:"제목, 가격 및 주요 정보가 바로 표시됩니다.",
+    all:"모든 제품 표시",
+    searchResults:"검색 결과",
+    noResults:"제품을 찾을 수 없습니다",
+    copy:"제품 링크 복사",
+    copied:"링크가 복사되었습니다!",
+    goated:"GoatedBuy로 이동",
+    sizes:"사용 가능한 사이즈"
+  }
+};
+
+/* =========================================================
+   VALUTOR
+   Priserna i PRODUCTS är SEK.
+   Exempelkurser – inte livekurser.
+   ========================================================= */
+
+const currencyRates = {
+  SEK:1,
+  EUR:0.091,
+  USD:0.107,
+  GBP:0.078,
+  CNY:0.77,
+  JPY:15.7,
+  CHF:0.085,
+  NOK:1.08,
+  DKK:0.68,
+  PLN:0.39
+};
+
+const currencySymbols = {
+  SEK:"kr",
+  EUR:"€",
+  USD:"$",
+  GBP:"£",
+  CNY:"¥",
+  JPY:"¥",
+  CHF:"CHF",
+  NOK:"kr",
+  DKK:"kr",
+  PLN:"zł"
+};
+
+let currentCurrency = "SEK";
+let currentLanguage = "sv";
+let currentProduct = null;
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function formatPrice(price){
+  const converted = price * currencyRates[currentCurrency];
+  const symbol = currencySymbols[currentCurrency];
+
+  if(currentCurrency === "JPY"){
+    return `${Math.round(converted)} ${symbol}`;
+  }
+
+  return `${converted.toFixed(2)} ${symbol}`;
+}
+
+function safeImage(src){
+  return src || "";
+}
+
+function escapeHTML(value){
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function renderProducts(){
+  const grid = document.getElementById("productsGrid");
+  const search = document.getElementById("search").value
+    .toLowerCase()
+    .trim();
+  const sort = document.getElementById("sort").value;
+
+  grid.innerHTML = "";
+
+  let filtered = PRODUCTS.filter(product=>{
+    const text = (
+      product.name + " " +
+      product.description
+    ).toLowerCase();
+
+    return text.includes(search);
+  });
+
+  if(sort === "price-low"){
+    filtered.sort((a,b)=>a.price-b.price);
+  }
+
+  if(sort === "price-high"){
+    filtered.sort((a,b)=>b.price-a.price);
+  }
+
+  if(sort === "name"){
+    filtered.sort((a,b)=>a.name.localeCompare(b.name,"sv"));
+  }
+
+  const t = translations[currentLanguage];
+
+  document.getElementById("productCount").textContent =
+    `${filtered.length} / ${PRODUCTS.length}`;
+
+  document.getElementById("filterNote").textContent =
+    search
+      ? `${t.searchResults}: "${search}"`
+      : t.all;
+
+  document.getElementById("noResults").style.display =
+    filtered.length === 0 ? "block" : "none";
+
+  filtered.forEach((product,index)=>{
+    const realNumber = PRODUCTS.indexOf(product) + 1;
+
+    const card = document.createElement("article");
+    card.className = "product-card";
+    card.style.animationDelay = `${Math.min(index * 18,180)}ms`;
+    card.onclick = ()=>openProduct(product);
+
+    const imageWrap = document.createElement("div");
+    imageWrap.className = "product-image-wrap";
+
+    const image = document.createElement("img");
+    image.className = "product-image";
+    image.src = safeImage(product.images[0]);
+    image.alt = product.name;
+    image.loading = "lazy";
+
+    const placeholder = document.createElement("div");
+    placeholder.className = "product-image-placeholder";
+    placeholder.innerHTML = "<span>Bild läggs till här</span>";
+
+    image.onerror = function(){
+      this.style.display = "none";
+      placeholder.style.display = "flex";
+    };
+
+    const badge = document.createElement("div");
+    badge.className = "product-badge";
+    badge.textContent = "ALEXFYNDS";
+
+    const number = document.createElement("div");
+    number.className = "product-number";
+    number.textContent = `#${String(realNumber).padStart(2,"0")}`;
+
+    imageWrap.appendChild(image);
+    imageWrap.appendChild(placeholder);
+    imageWrap.appendChild(badge);
+    imageWrap.appendChild(number);
+
+    const info = document.createElement("div");
+    info.className = "product-info";
+
+    const name = document.createElement("div");
+    name.className = "product-name";
+    name.textContent = product.name;
+
+    const priceRow = document.createElement("div");
+    priceRow.className = "price-row";
+
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent = formatPrice(product.price);
+
+    const currency = document.createElement("div");
+    currency.className = "price-currency";
+    currency.textContent = currentCurrency;
+
+    priceRow.appendChild(price);
+    priceRow.appendChild(currency);
+
+    const shipping = document.createElement("div");
+    shipping.className = "shipping";
+    shipping.textContent = "✓ Pris exkl. frakt";
+
+    const bottom = document.createElement("div");
+    bottom.className = "card-bottom";
+
+    const sizes = document.createElement("div");
+    sizes.className = "sizes";
+    sizes.textContent =
+      product.sizes && product.sizes.length
+        ? "Storlekar: " + product.sizes.join(", ")
+        : "Produktinformation";
+
+    const view = document.createElement("div");
+    view.className = "view-product";
+    view.innerHTML = "→";
+    view.setAttribute("aria-label","Öppna produkt");
+
+    bottom.appendChild(sizes);
+    bottom.appendChild(view);
+
+    info.appendChild(name);
+    info.appendChild(priceRow);
+    info.appendChild(shipping);
+    info.appendChild(bottom);
+
+    card.appendChild(imageWrap);
+    card.appendChild(info);
+
+    grid.appendChild(card);
+  });
+}
+
+/* =========================================================
+   OPEN PRODUCT
+   ========================================================= */
+
+function openProduct(product){
+  currentProduct = product;
+
+  const modal = document.getElementById("productModal");
+  const mainImage = document.getElementById("mainImage");
+  const thumbnails = document.getElementById("thumbnails");
+
+  document.getElementById("modalName").textContent = product.name;
+  document.getElementById("modalPrice").textContent =
+    formatPrice(product.price);
+
+  document.getElementById("modalDescription").textContent =
+    product.description;
+
+  document.getElementById("sizeTitle").textContent =
+    translations[currentLanguage].sizes;
+
+  document.getElementById("modalSizes").innerHTML =
+    (product.sizes || [])
+      .map(size=>`<span class="size-pill">${escapeHTML(size)}</span>`)
+      .join("");
+
+  mainImage.src = safeImage(product.images[0]);
+  mainImage.alt = product.name;
+
+  thumbnails.innerHTML = "";
+
+  product.images.forEach((image,index)=>{
+    const thumb = document.createElement("img");
+    thumb.className = "thumbnail";
+    if(index === 0) thumb.classList.add("active");
+
+    thumb.src = image;
+    thumb.alt = `${product.name} bild ${index+1}`;
+    thumb.loading = "lazy";
+
+    thumb.onerror = function(){
+      this.style.display = "none";
+    };
+
+    thumb.onclick = function(event){
+      event.stopPropagation();
+
+      mainImage.src = image;
+
+      document
+        .querySelectorAll(".thumbnail")
+        .forEach(t=>t.classList.remove("active"));
+
+      this.classList.add("active");
+    };
+
+    thumbnails.appendChild(thumb);
+  });
+
+  document.getElementById("copyButton").textContent =
+    translations[currentLanguage].copy;
+
+  document.getElementById("goatedButton").textContent =
+    translations[currentLanguage].goated;
+
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden","false");
+  document.body.classList.add("modal-open");
+}
+
+/* =========================================================
+   CLOSE MODAL
+   ========================================================= */
+
+function closeModal(){
+  const modal = document.getElementById("productModal");
+
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden","true");
+  document.body.classList.remove("modal-open");
+}
+
+/* =========================================================
+   COPY LINK
+   ========================================================= */
+
+async function copyProductLink(){
+  if(!currentProduct) return;
+
+  const link = currentProduct.link;
+
+  if(!link || link === "DIN_PRODUKTLÄNK_HÄR"){
+    alert("Lägg in produktlänken först i produktens 'link'.");
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(link);
+
+    const button = document.getElementById("copyButton");
+    const original = translations[currentLanguage].copy;
+
+    button.textContent =
+      translations[currentLanguage].copied;
+
+    setTimeout(()=>{
+      button.textContent = original;
+    },1800);
+
+  }catch(error){
+    const temp = document.createElement("textarea");
+
+    temp.value = link;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    temp.remove();
+
+    alert("Produktlänken har kopierats!");
+  }
+}
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+function updateLanguage(){
+  const t = translations[currentLanguage];
+
+  document.getElementById("search").placeholder = t.search;
+  document.getElementById("heroText").textContent = t.hero;
+  document.getElementById("productsTitle").textContent = t.products;
+  document.getElementById("sectionSubtitle").textContent = t.subtitle;
+  document.querySelector("#noResults h3").textContent = t.noResults;
+
+  if(currentProduct){
+    document.getElementById("copyButton").textContent = t.copy;
+    document.getElementById("goatedButton").textContent = t.goated;
+    document.getElementById("sizeTitle").textContent = t.sizes;
+  }
+
+  renderProducts();
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+const searchInput = document.getElementById("search");
+const searchClear = document.getElementById("searchClear");
+
+searchInput.addEventListener("input",()=>{
+  searchClear.classList.toggle(
+    "visible",
+    searchInput.value.length > 0
+  );
+
+  renderProducts();
+});
+
+searchClear.addEventListener("click",()=>{
+  searchInput.value = "";
+  searchClear.classList.remove("visible");
+  renderProducts();
+  searchInput.focus();
+});
+
+/* =========================================================
+   SORT
+   ========================================================= */
+
+document.getElementById("sort").addEventListener("change",renderProducts);
+
+/* =========================================================
+   CURRENCY
+   ========================================================= */
+
+document.getElementById("currency").addEventListener("change",function(){
+  currentCurrency = this.value;
+
+  renderProducts();
+
+  if(currentProduct){
+    document.getElementById("modalPrice").textContent =
+      formatPrice(currentProduct.price);
+  }
+});
+
+/* =========================================================
+   LANGUAGE CHANGE
+   ========================================================= */
+
+document.getElementById("language").addEventListener("change",function(){
+  currentLanguage = this.value;
+  updateLanguage();
+});
+
+/* =========================================================
+   MODAL EVENTS
+   ========================================================= */
+
+document.getElementById("productModal").addEventListener("click",function(e){
+  if(e.target === this){
+    closeModal();
+  }
+});
+
+document.addEventListener("keydown",function(e){
+  if(e.key === "Escape"){
+    closeModal();
+    closeWelcome();
+  }
+});
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
+
+function scrollToProducts(){
+  document.getElementById("productsSection").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+function focusSearch(){
+  searchInput.focus();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+/* =========================================================
+   WELCOME POPUP
+   ========================================================= */
+
+function closeWelcome(){
+  const overlay = document.getElementById("welcomeOverlay");
+
+  overlay.style.display = "none";
+
+  try{
+    localStorage.setItem(
+      "alexfynds_welcome_seen",
+      "1"
+    );
+  }catch(error){}
+}
+
+try{
+  if(localStorage.getItem("alexfynds_welcome_seen") === "1"){
+    document.getElementById("welcomeOverlay").style.display = "none";
+  }
+}catch(error){}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+
+document.getElementById("heroProductNumber").textContent =
+  PRODUCTS.length;
+
+renderProducts();
+</script>
+
+</body>
+</html>
