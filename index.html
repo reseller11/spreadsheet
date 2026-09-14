@@ -1,0 +1,2054 @@
+<script>
+
+/* =========================================================
+   ALEXFYNDS — FIXAD JAVASCRIPT
+   ========================================================= */
+
+
+/* =========================================================
+   TRANSLATIONS
+   ========================================================= */
+
+const translations = {
+
+  sv: {
+    search: "Sök bland alla produkter...",
+    hero: "Upptäck noggrant utvalda produkter, smarta priser och fynd som är värda att kolla in.",
+    productsTitle: "Alla produkter",
+    description: "Bläddra bland våra produkter och öppna en produkt för mer information.",
+    all: "Visar alla produkter",
+    product: "produkt",
+    products: "produkter",
+    sizes: "Tillgängliga storlekar",
+    copy: "🔗 Kopiera produktlänk",
+    copied: "✓ Länk kopierad!",
+    open: "Öppna produkt →",
+    noResults: "Inga produkter hittades"
+  },
+
+  en: {
+    search: "Search all products...",
+    hero: "Discover selected products, smart prices and finds worth checking out.",
+    productsTitle: "All products",
+    description: "Browse our products and open a product for more information.",
+    all: "Showing all products",
+    product: "product",
+    products: "products",
+    sizes: "Available sizes",
+    copy: "🔗 Copy product link",
+    copied: "✓ Link copied!",
+    open: "Open product →",
+    noResults: "No products found"
+  },
+
+  de: {
+    search: "Produkte durchsuchen...",
+    hero: "Entdecke ausgewählte Produkte und interessante Angebote.",
+    productsTitle: "Alle Produkte",
+    description: "Durchsuche unsere Produkte.",
+    all: "Alle Produkte",
+    product: "Produkt",
+    products: "Produkte",
+    sizes: "Verfügbare Größen",
+    copy: "🔗 Produktlink kopieren",
+    copied: "✓ Link kopiert!",
+    open: "Produkt öffnen →",
+    noResults: "Keine Produkte gefunden"
+  },
+
+  es: {
+    search: "Buscar productos...",
+    hero: "Descubre productos seleccionados y ofertas interesantes.",
+    productsTitle: "Todos los productos",
+    description: "Explora nuestros productos.",
+    all: "Todos los productos",
+    product: "producto",
+    products: "productos",
+    sizes: "Tallas disponibles",
+    copy: "🔗 Copiar enlace",
+    copied: "✓ ¡Enlace copiado!",
+    open: "Abrir producto →",
+    noResults: "No se encontraron productos"
+  },
+
+  fr: {
+    search: "Rechercher des produits...",
+    hero: "Découvrez des produits sélectionnés et des offres intéressantes.",
+    productsTitle: "Tous les produits",
+    description: "Parcourez nos produits.",
+    all: "Tous les produits",
+    product: "produit",
+    products: "produits",
+    sizes: "Tailles disponibles",
+    copy: "🔗 Copier le lien",
+    copied: "✓ Lien copié !",
+    open: "Ouvrir le produit →",
+    noResults: "Aucun produit trouvé"
+  },
+
+  it: {
+    search: "Cerca prodotti...",
+    hero: "Scopri prodotti selezionati e offerte interessanti.",
+    productsTitle: "Tutti i prodotti",
+    description: "Scopri i nostri prodotti.",
+    all: "Tutti i prodotti",
+    product: "prodotto",
+    products: "prodotti",
+    sizes: "Taglie disponibili",
+    copy: "🔗 Copia link",
+    copied: "✓ Link copiato!",
+    open: "Apri prodotto →",
+    noResults: "Nessun prodotto trovato"
+  },
+
+  nl: {
+    search: "Producten zoeken...",
+    hero: "Ontdek geselecteerde producten en interessante deals.",
+    productsTitle: "Alle producten",
+    description: "Bekijk onze producten.",
+    all: "Alle producten",
+    product: "product",
+    products: "producten",
+    sizes: "Beschikbare maten",
+    copy: "🔗 Productlink kopiëren",
+    copied: "✓ Link gekopieerd!",
+    open: "Product openen →",
+    noResults: "Geen producten gevonden"
+  }
+
+};
+
+
+/* =========================================================
+   CURRENCY
+   ========================================================= */
+
+const currencyRates = {
+
+  SEK: 1,
+
+  EUR: 0.088,
+
+  USD: 0.104,
+
+  GBP: 0.076,
+
+  DKK: 0.66,
+
+  NOK: 1.04,
+
+  PLN: 0.38,
+
+  CHF: 0.082
+
+};
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+   ========================================================= */
+
+let currentLanguage = "sv";
+
+let currentCurrency = "SEK";
+
+let currentProduct = null;
+
+
+/* =========================================================
+   PRODUCTS
+   =========================================================
+   VIKTIGT:
+
+   PRODUCTS SKAPAS FÖRST.
+
+   SEDAN körs renderProducts().
+
+   Det var detta som var fel i förra versionen.
+   ========================================================= */
+
+
+const PRODUCTS = [
+
+  {
+    name: "Produkt 01",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 01. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt01.jpg",
+      "images/produkt01-2.jpg",
+      "images/produkt01-3.jpg",
+      "images/produkt01-4.jpg",
+      "images/produkt01-5.jpg",
+      "images/produkt01-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 02",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 02. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt02.jpg",
+      "images/produkt02-2.jpg",
+      "images/produkt02-3.jpg",
+      "images/produkt02-4.jpg",
+      "images/produkt02-5.jpg",
+      "images/produkt02-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 03",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 03. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt03.jpg",
+      "images/produkt03-2.jpg",
+      "images/produkt03-3.jpg",
+      "images/produkt03-4.jpg",
+      "images/produkt03-5.jpg",
+      "images/produkt03-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 04",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 04. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt04.jpg",
+      "images/produkt04-2.jpg",
+      "images/produkt04-3.jpg",
+      "images/produkt04-4.jpg",
+      "images/produkt04-5.jpg",
+      "images/produkt04-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 05",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 05. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt05.jpg",
+      "images/produkt05-2.jpg",
+      "images/produkt05-3.jpg",
+      "images/produkt05-4.jpg",
+      "images/produkt05-5.jpg",
+      "images/produkt05-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 06",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 06. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt06.jpg",
+      "images/produkt06-2.jpg",
+      "images/produkt06-3.jpg",
+      "images/produkt06-4.jpg",
+      "images/produkt06-5.jpg",
+      "images/produkt06-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 07",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 07. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt07.jpg",
+      "images/produkt07-2.jpg",
+      "images/produkt07-3.jpg",
+      "images/produkt07-4.jpg",
+      "images/produkt07-5.jpg",
+      "images/produkt07-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 08",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 08. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt08.jpg",
+      "images/produkt08-2.jpg",
+      "images/produkt08-3.jpg",
+      "images/produkt08-4.jpg",
+      "images/produkt08-5.jpg",
+      "images/produkt08-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 09",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 09. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt09.jpg",
+      "images/produkt09-2.jpg",
+      "images/produkt09-3.jpg",
+      "images/produkt09-4.jpg",
+      "images/produkt09-5.jpg",
+      "images/produkt09-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  },
+
+
+  {
+    name: "Produkt 10",
+
+    price: 299,
+
+    description:
+      "Beskrivning för Produkt 10. Byt ut denna text mot information om produkten.",
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+      "images/produkt10.jpg",
+      "images/produkt10-2.jpg",
+      "images/produkt10-3.jpg",
+      "images/produkt10-4.jpg",
+      "images/produkt10-5.jpg",
+      "images/produkt10-6.jpg"
+    ],
+
+    link: "DIN_PRODUKTLÄNK_HÄR"
+  }
+
+];
+
+
+/* =========================================================
+   GENERERA PRODUKT 11–200
+   ========================================================= */
+
+for (
+  let i = 11;
+  i <= 200;
+  i++
+) {
+
+  const number =
+    String(i).padStart(2, "0");
+
+
+  PRODUCTS.push({
+
+    name:
+      `Produkt ${number}`,
+
+    price:
+      299,
+
+    description:
+      `Beskrivning för Produkt ${number}. Byt ut denna text mot information om produkten.`,
+
+    sizes: [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+
+    images: [
+
+      `images/produkt${number}.jpg`,
+
+      `images/produkt${number}-2.jpg`,
+
+      `images/produkt${number}-3.jpg`,
+
+      `images/produkt${number}-4.jpg`,
+
+      `images/produkt${number}-5.jpg`,
+
+      `images/produkt${number}-6.jpg`
+
+    ],
+
+    link:
+      "DIN_PRODUKTLÄNK_HÄR"
+
+  });
+
+}
+
+
+/* =========================================================
+   DOM
+   ========================================================= */
+
+const productGrid =
+  document.getElementById(
+    "productGrid"
+  );
+
+const searchInput =
+  document.getElementById(
+    "searchInput"
+  );
+
+const clearSearch =
+  document.getElementById(
+    "clearSearch"
+  );
+
+const sortSelect =
+  document.getElementById(
+    "sortSelect"
+  );
+
+const languageSelect =
+  document.getElementById(
+    "languageSelect"
+  );
+
+const currencySelect =
+  document.getElementById(
+    "currencySelect"
+  );
+
+const productModal =
+  document.getElementById(
+    "productModal"
+  );
+
+const welcomeOverlay =
+  document.getElementById(
+    "welcomeOverlay"
+  );
+
+
+/* =========================================================
+   PRICE FORMAT
+   ========================================================= */
+
+function formatPrice(price) {
+
+  const converted =
+    Number(price) *
+    currencyRates[currentCurrency];
+
+
+  return new Intl.NumberFormat(
+    currentLanguage === "sv"
+      ? "sv-SE"
+      : currentLanguage,
+    {
+      maximumFractionDigits:
+        currentCurrency === "SEK"
+          ? 0
+          : 2
+    }
+  ).format(converted)
+    + " "
+    + currentCurrency;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
+   ========================================================= */
+
+function renderProducts() {
+
+  let products =
+    [...PRODUCTS];
+
+
+  /* -----------------------------------------
+     SEARCH
+     ----------------------------------------- */
+
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+
+  if (search) {
+
+    products =
+      products.filter(
+        product => {
+
+          const name =
+            String(
+              product.name || ""
+            ).toLowerCase();
+
+
+          const description =
+            String(
+              product.description || ""
+            ).toLowerCase();
+
+
+          return (
+            name.includes(search)
+            ||
+            description.includes(search)
+          );
+
+        }
+      );
+
+  }
+
+
+  /* -----------------------------------------
+     SORT
+     ----------------------------------------- */
+
+  const sort =
+    sortSelect.value;
+
+
+  if (sort === "low") {
+
+    products.sort(
+      (a,b) =>
+        Number(a.price) -
+        Number(b.price)
+    );
+
+  }
+
+
+  if (sort === "high") {
+
+    products.sort(
+      (a,b) =>
+        Number(b.price) -
+        Number(a.price)
+    );
+
+  }
+
+
+  if (sort === "az") {
+
+    products.sort(
+      (a,b) =>
+        String(a.name)
+          .localeCompare(
+            String(b.name),
+            currentLanguage
+          )
+    );
+
+  }
+
+
+  if (sort === "za") {
+
+    products.sort(
+      (a,b) =>
+        String(b.name)
+          .localeCompare(
+            String(a.name),
+            currentLanguage
+          )
+    );
+
+  }
+
+
+  /* -----------------------------------------
+     CLEAR
+     ----------------------------------------- */
+
+  productGrid.innerHTML =
+    "";
+
+
+  /* -----------------------------------------
+     TRANSLATION
+     ----------------------------------------- */
+
+  const t =
+    translations[currentLanguage];
+
+
+  /* -----------------------------------------
+     COUNT
+     ----------------------------------------- */
+
+  const resultCount =
+    document.getElementById(
+      "resultCount"
+    );
+
+
+  resultCount.textContent =
+    `${products.length} ${
+      products.length === 1
+        ? t.product
+        : t.products
+    }`;
+
+
+  /* -----------------------------------------
+     FILTER TEXT
+     ----------------------------------------- */
+
+  document.getElementById(
+    "filterText"
+  ).textContent =
+    search
+      ? `"${search}" — ${products.length} träffar`
+      : t.all;
+
+
+  /* -----------------------------------------
+     NO RESULTS
+     ----------------------------------------- */
+
+  const noResults =
+    document.getElementById(
+      "noResults"
+    );
+
+
+  noResults.style.display =
+    products.length === 0
+      ? "block"
+      : "none";
+
+
+  /* -----------------------------------------
+     CREATE PRODUCT CARDS
+     ----------------------------------------- */
+
+  products.forEach(
+    (product,index) => {
+
+
+      const originalIndex =
+        PRODUCTS.indexOf(product);
+
+
+      const productNumber =
+        originalIndex + 1;
+
+
+      /* CARD */
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "product-card";
+
+
+      card.style.animationDelay =
+        Math.min(
+          index * 15,
+          250
+        ) + "ms";
+
+
+      card.addEventListener(
+        "click",
+        () => openProduct(product)
+      );
+
+
+      /* IMAGE CONTAINER */
+
+      const imageContainer =
+        document.createElement(
+          "div"
+        );
+
+
+      imageContainer.className =
+        "product-image-container";
+
+
+      /* IMAGE */
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+
+      image.className =
+        "product-image";
+
+
+      image.src =
+        product.images &&
+        product.images[0]
+          ? product.images[0]
+          : "";
+
+
+      image.alt =
+        product.name;
+
+
+      image.loading =
+        index < 8
+          ? "eager"
+          : "lazy";
+
+
+      /* PLACEHOLDER */
+
+      const placeholder =
+        document.createElement(
+          "div"
+        );
+
+
+      placeholder.className =
+        "image-placeholder";
+
+
+      placeholder.innerHTML = `
+
+        <div class="image-placeholder-icon">
+          🖼️
+        </div>
+
+        <span>
+          Bild läggs till här
+        </span>
+
+      `;
+
+
+      /* IMAGE ERROR */
+
+      image.addEventListener(
+        "error",
+        function() {
+
+          image.style.display =
+            "none";
+
+          placeholder.style.display =
+            "flex";
+
+        }
+      );
+
+
+      /* BADGE */
+
+      const badge =
+        document.createElement(
+          "div"
+        );
+
+
+      badge.className =
+        "product-badge";
+
+
+      badge.textContent =
+        "ALEXFYNDS";
+
+
+      /* NUMBER */
+
+      const number =
+        document.createElement(
+          "div"
+        );
+
+
+      number.className =
+        "product-number";
+
+
+      number.textContent =
+        "#" +
+        String(productNumber)
+          .padStart(2,"0");
+
+
+      imageContainer.appendChild(
+        image
+      );
+
+
+      imageContainer.appendChild(
+        placeholder
+      );
+
+
+      imageContainer.appendChild(
+        badge
+      );
+
+
+      imageContainer.appendChild(
+        number
+      );
+
+
+      /* -----------------------------------
+         INFO
+         ----------------------------------- */
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+
+      info.className =
+        "product-info";
+
+
+      /* NAME */
+
+      const name =
+        document.createElement(
+          "div"
+        );
+
+
+      name.className =
+        "product-name";
+
+
+      name.textContent =
+        product.name;
+
+
+      /* PRICE ROW */
+
+      const priceRow =
+        document.createElement(
+          "div"
+        );
+
+
+      priceRow.className =
+        "price-row";
+
+
+      /* PRICE */
+
+      const price =
+        document.createElement(
+          "div"
+        );
+
+
+      price.className =
+        "product-price";
+
+
+      price.textContent =
+        formatPrice(
+          product.price
+        );
+
+
+      /* CURRENCY */
+
+      const currency =
+        document.createElement(
+          "div"
+        );
+
+
+      currency.className =
+        "currency-label";
+
+
+      currency.textContent =
+        currentCurrency;
+
+
+      priceRow.appendChild(
+        price
+      );
+
+
+      priceRow.appendChild(
+        currency
+      );
+
+
+      /* SHIPPING */
+
+      const shipping =
+        document.createElement(
+          "div"
+        );
+
+
+      shipping.className =
+        "shipping";
+
+
+      shipping.textContent =
+        "✓ Pris exkl. eventuell frakt";
+
+
+      /* BOTTOM */
+
+      const bottom =
+        document.createElement(
+          "div"
+        );
+
+
+      bottom.className =
+        "card-bottom";
+
+
+      /* SIZES */
+
+      const sizes =
+        document.createElement(
+          "div"
+        );
+
+
+      sizes.className =
+        "product-sizes";
+
+
+      if (
+        product.sizes &&
+        product.sizes.length
+      ) {
+
+        sizes.textContent =
+          "Storlekar: " +
+          product.sizes.join(", ");
+
+      } else {
+
+        sizes.textContent =
+          "Produktinformation";
+
+      }
+
+
+      /* ARROW */
+
+      const arrow =
+        document.createElement(
+          "div"
+        );
+
+
+      arrow.className =
+        "open-arrow";
+
+
+      arrow.textContent =
+        "→";
+
+
+      bottom.appendChild(
+        sizes
+      );
+
+
+      bottom.appendChild(
+        arrow
+      );
+
+
+      /* APPEND INFO */
+
+      info.appendChild(
+        name
+      );
+
+
+      info.appendChild(
+        priceRow
+      );
+
+
+      info.appendChild(
+        shipping
+      );
+
+
+      info.appendChild(
+        bottom
+      );
+
+
+      /* APPEND CARD */
+
+      card.appendChild(
+        imageContainer
+      );
+
+
+      card.appendChild(
+        info
+      );
+
+
+      productGrid.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   OPEN PRODUCT
+   ========================================================= */
+
+function openProduct(product) {
+
+  currentProduct =
+    product;
+
+
+  const t =
+    translations[currentLanguage];
+
+
+  const mainImage =
+    document.getElementById(
+      "mainProductImage"
+    );
+
+
+  const thumbnails =
+    document.getElementById(
+      "thumbnailContainer"
+    );
+
+
+  /* NAME */
+
+  document.getElementById(
+    "modalProductName"
+  ).textContent =
+    product.name;
+
+
+  /* PRICE */
+
+  document.getElementById(
+    "modalProductPrice"
+  ).textContent =
+    formatPrice(
+      product.price
+    );
+
+
+  /* DESCRIPTION */
+
+  document.getElementById(
+    "modalProductDescription"
+  ).textContent =
+    product.description;
+
+
+  /* SIZE TITLE */
+
+  document.getElementById(
+    "sizeHeading"
+  ).textContent =
+    t.sizes;
+
+
+  /* COPY BUTTON */
+
+  document.getElementById(
+    "copyProductButton"
+  ).textContent =
+    t.copy;
+
+
+  /* OPEN BUTTON */
+
+  const goatedButton =
+    document.getElementById(
+      "goatedButton"
+    );
+
+
+  goatedButton.textContent =
+    t.open;
+
+
+  /* -----------------------------------
+     MAIN IMAGE
+     ----------------------------------- */
+
+  const firstImage =
+    product.images &&
+    product.images.length
+      ? product.images[0]
+      : "";
+
+
+  mainImage.src =
+    firstImage;
+
+
+  mainImage.alt =
+    product.name;
+
+
+  /* -----------------------------------
+     THUMBNAILS
+     ----------------------------------- */
+
+  thumbnails.innerHTML =
+    "";
+
+
+  if (
+    product.images &&
+    product.images.length
+  ) {
+
+    product.images.forEach(
+      (image,index) => {
+
+        const thumbnail =
+          document.createElement(
+            "img"
+          );
+
+
+        thumbnail.className =
+          "thumbnail";
+
+
+        if(index === 0){
+
+          thumbnail.classList.add(
+            "active"
+          );
+
+        }
+
+
+        thumbnail.src =
+          image;
+
+
+        thumbnail.alt =
+          product.name +
+          " bild " +
+          (index + 1);
+
+
+        thumbnail.addEventListener(
+          "error",
+          function(){
+
+            thumbnail.style.display =
+              "none";
+
+          }
+        );
+
+
+        thumbnail.addEventListener(
+          "click",
+          function(event){
+
+            event.stopPropagation();
+
+
+            mainImage.src =
+              image;
+
+
+            document
+              .querySelectorAll(
+                ".thumbnail"
+              )
+              .forEach(
+                item =>
+                  item.classList.remove(
+                    "active"
+                  )
+              );
+
+
+            thumbnail.classList.add(
+              "active"
+            );
+
+          }
+        );
+
+
+        thumbnails.appendChild(
+          thumbnail
+        );
+
+      }
+    );
+
+  }
+
+
+  /* -----------------------------------
+     SIZES
+     ----------------------------------- */
+
+  const modalSizes =
+    document.getElementById(
+      "modalSizes"
+    );
+
+
+  modalSizes.innerHTML =
+    "";
+
+
+  if (
+    product.sizes &&
+    product.sizes.length
+  ) {
+
+    product.sizes.forEach(
+      size => {
+
+        const pill =
+          document.createElement(
+            "span"
+          );
+
+
+        pill.className =
+          "size-pill";
+
+
+        pill.textContent =
+          size;
+
+
+        modalSizes.appendChild(
+          pill
+        );
+
+      }
+    );
+
+  }
+
+
+  /* -----------------------------------
+     PRODUCT LINK
+     ----------------------------------- */
+
+  goatedButton.onclick =
+    null;
+
+
+  if (
+    product.link &&
+    product.link !==
+      "DIN_PRODUKTLÄNK_HÄR"
+  ) {
+
+    goatedButton.href =
+      product.link;
+
+    goatedButton.target =
+      "_blank";
+
+  } else {
+
+    goatedButton.href =
+      "#";
+
+
+    goatedButton.onclick =
+      function(event){
+
+        event.preventDefault();
+
+
+        alert(
+          "Lägg först in produktens riktiga länk i PRODUCTS."
+        );
+
+      };
+
+  }
+
+
+  /* -----------------------------------
+     OPEN MODAL
+     ----------------------------------- */
+
+  productModal.classList.add(
+    "active"
+  );
+
+
+  productModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+
+  document.body.classList.add(
+    "modal-open"
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+   ========================================================= */
+
+function closeModal() {
+
+  productModal.classList.remove(
+    "active"
+  );
+
+
+  productModal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+
+  document.body.classList.remove(
+    "modal-open"
+  );
+
+}
+
+
+/* =========================================================
+   COPY PRODUCT LINK
+   ========================================================= */
+
+async function copyProductLink() {
+
+  if (!currentProduct) {
+    return;
+  }
+
+
+  const link =
+    currentProduct.link;
+
+
+  if (
+    !link ||
+    link ===
+      "DIN_PRODUKTLÄNK_HÄR"
+  ) {
+
+    alert(
+      "Lägg först in produktens länk i PRODUCTS."
+    );
+
+    return;
+
+  }
+
+
+  try {
+
+    await navigator.clipboard.writeText(
+      link
+    );
+
+
+    const button =
+      document.getElementById(
+        "copyProductButton"
+      );
+
+
+    const original =
+      translations[currentLanguage]
+        .copy;
+
+
+    button.textContent =
+      translations[currentLanguage]
+        .copied;
+
+
+    setTimeout(
+      function(){
+
+        button.textContent =
+          original;
+
+      },
+      1800
+    );
+
+
+  } catch(error) {
+
+    const textarea =
+      document.createElement(
+        "textarea"
+      );
+
+
+    textarea.value =
+      link;
+
+
+    textarea.style.position =
+      "fixed";
+
+
+    textarea.style.opacity =
+      "0";
+
+
+    document.body.appendChild(
+      textarea
+    );
+
+
+    textarea.focus();
+
+
+    textarea.select();
+
+
+    document.execCommand(
+      "copy"
+    );
+
+
+    textarea.remove();
+
+
+    alert(
+      "Produktlänken har kopierats!"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE LANGUAGE
+   ========================================================= */
+
+function updateLanguage() {
+
+  const t =
+    translations[currentLanguage];
+
+
+  /* SEARCH */
+
+  searchInput.placeholder =
+    t.search;
+
+
+  /* HERO */
+
+  const heroDescription =
+    document.getElementById(
+      "heroDescription"
+    );
+
+
+  if(heroDescription){
+
+    heroDescription.textContent =
+      t.hero;
+
+  }
+
+
+  /* PRODUCTS TITLE */
+
+  const productsTitle =
+    document.getElementById(
+      "productsTitle"
+    );
+
+
+  if(productsTitle){
+
+    productsTitle.textContent =
+      t.productsTitle;
+
+  }
+
+
+  /* DESCRIPTION */
+
+  const sectionDescription =
+    document.getElementById(
+      "sectionDescription"
+    );
+
+
+  if(sectionDescription){
+
+    sectionDescription.textContent =
+      t.description;
+
+  }
+
+
+  /* NO RESULTS */
+
+  const noResultsTitle =
+    document.querySelector(
+      "#noResults h3"
+    );
+
+
+  if(noResultsTitle){
+
+    noResultsTitle.textContent =
+      t.noResults;
+
+  }
+
+
+  /* RENDER */
+
+  renderProducts();
+
+
+  /* UPDATE OPEN MODAL */
+
+  if(currentProduct){
+
+    document.getElementById(
+      "modalProductName"
+    ).textContent =
+      currentProduct.name;
+
+
+    document.getElementById(
+      "modalProductPrice"
+    ).textContent =
+      formatPrice(
+        currentProduct.price
+      );
+
+
+    document.getElementById(
+      "modalProductDescription"
+    ).textContent =
+      currentProduct.description;
+
+
+    document.getElementById(
+      "sizeHeading"
+    ).textContent =
+      t.sizes;
+
+
+    document.getElementById(
+      "copyProductButton"
+    ).textContent =
+      t.copy;
+
+
+    document.getElementById(
+      "goatedButton"
+    ).textContent =
+      t.open;
+
+  }
+
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+searchInput.addEventListener(
+  "input",
+  function(){
+
+    clearSearch.classList.toggle(
+      "show",
+      this.value.trim().length > 0
+    );
+
+
+    renderProducts();
+
+  }
+);
+
+
+/* =========================================================
+   CLEAR SEARCH
+   ========================================================= */
+
+clearSearch.addEventListener(
+  "click",
+  function(){
+
+    searchInput.value =
+      "";
+
+
+    clearSearch.classList.remove(
+      "show"
+    );
+
+
+    renderProducts();
+
+
+    searchInput.focus();
+
+  }
+);
+
+
+/* =========================================================
+   SORT
+   ========================================================= */
+
+sortSelect.addEventListener(
+  "change",
+  function(){
+
+    renderProducts();
+
+  }
+);
+
+
+/* =========================================================
+   CURRENCY
+   ========================================================= */
+
+currencySelect.addEventListener(
+  "change",
+  function(){
+
+    currentCurrency =
+      this.value;
+
+
+    renderProducts();
+
+
+    if(currentProduct){
+
+      document.getElementById(
+        "modalProductPrice"
+      ).textContent =
+        formatPrice(
+          currentProduct.price
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+languageSelect.addEventListener(
+  "change",
+  function(){
+
+    currentLanguage =
+      this.value;
+
+
+    updateLanguage();
+
+  }
+);
+
+
+/* =========================================================
+   MODAL CLOSE BUTTON
+   ========================================================= */
+
+document.getElementById(
+  "modalClose"
+).addEventListener(
+  "click",
+  closeModal
+);
+
+
+/* =========================================================
+   MODAL BACKGROUND CLICK
+   ========================================================= */
+
+productModal.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target ===
+      productModal
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   COPY BUTTON
+   ========================================================= */
+
+document.getElementById(
+  "copyProductButton"
+).addEventListener(
+  "click",
+  copyProductLink
+);
+
+
+/* =========================================================
+   ESCAPE KEY
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      closeModal();
+
+      closeWelcome();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SCROLL TO PRODUCTS
+   ========================================================= */
+
+function scrollToProducts(){
+
+  const section =
+    document.getElementById(
+      "productsSection"
+    );
+
+
+  if(section){
+
+    section.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   FOCUS SEARCH
+   ========================================================= */
+
+function focusSearch(){
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+
+  setTimeout(
+    function(){
+
+      searchInput.focus();
+
+    },
+    350
+  );
+
+}
+
+
+/* =========================================================
+   WELCOME POPUP
+   ========================================================= */
+
+function closeWelcome(){
+
+  if(
+    welcomeOverlay
+  ){
+
+    welcomeOverlay.style.display =
+      "none";
+
+  }
+
+
+  try{
+
+    localStorage.setItem(
+      "alexfynds_welcome_seen",
+      "1"
+    );
+
+  }catch(error){}
+
+}
+
+
+/* =========================================================
+   WELCOME MEMORY
+   ========================================================= */
+
+try{
+
+  const welcomeSeen =
+    localStorage.getItem(
+      "alexfynds_welcome_seen"
+    );
+
+
+  if(
+    welcomeSeen === "1"
+  ){
+
+    welcomeOverlay.style.display =
+      "none";
+
+  }
+
+}catch(error){}
+
+
+/* =========================================================
+   FINAL INITIALIZATION
+   ---------------------------------------------------------
+   VIKTIGT:
+
+   Detta ligger SIST.
+
+   PRODUCTS finns redan här.
+   Därför fungerar renderProducts().
+   ========================================================= */
+
+document.getElementById(
+  "heroProductCount"
+).textContent =
+  PRODUCTS.length + "+";
+
+
+updateLanguage();
+
+
+console.log(
+  "AlexFynds loaded successfully:",
+  PRODUCTS.length,
+  "products"
+);
+
+</script>
